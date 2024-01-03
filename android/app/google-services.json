@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "585262537421",
+    "project_id": "sr-group-stays-4cdb3",
+    "storage_bucket": "sr-group-stays-4cdb3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:585262537421:android:77a43796ac0417ef2a6784",
+        "android_client_info": {
+          "package_name": "com.mycompany.srgroupstays"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDF57DBGe4rbueY9QUeg-prrP6AT8MrXCA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:585262537421:android:679c9a99fb918c282a6784",
+        "android_client_info": {
+          "package_name": "com.srgroupEmployee"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDF57DBGe4rbueY9QUeg-prrP6AT8MrXCA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
