@@ -127,785 +127,676 @@ class _VillasBookingDetailsWidgetState
           ),
           body: Column(
             mainAxisSize: MainAxisSize.max,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Expanded(
+              Align(
+                alignment: const AlignmentDirectional(-1.0, 0.0),
+                child: Padding(
+                  padding:
+                      const EdgeInsetsDirectional.fromSTEB(18.0, 15.0, 18.0, 0.0),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(8.0),
+                    child: Image.network(
+                      villasBookingDetailsVillasRecord.phoUrl,
+                      width: 512.0,
+                      height: 251.0,
+                      fit: BoxFit.fill,
+                      alignment: const Alignment(0.0, 0.0),
+                    ),
+                  ),
+                ),
+              ),
+              Column(
+                mainAxisSize: MainAxisSize.max,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding:
+                        const EdgeInsetsDirectional.fromSTEB(16.0, 12.0, 0.0, 0.0),
+                    child: Text(
+                      villasBookingDetailsVillasRecord.displayName,
+                      style:
+                          FlutterFlowTheme.of(context).headlineMedium.override(
+                                fontFamily: 'Outfit',
+                                fontSize: 20.0,
+                              ),
+                    ),
+                  ),
+                  Padding(
+                    padding:
+                        const EdgeInsetsDirectional.fromSTEB(16.0, 8.0, 0.0, 0.0),
+                    child: Text(
+                      villasBookingDetailsVillasRecord.location,
+                      style: FlutterFlowTheme.of(context).labelMedium,
+                    ),
+                  ),
+                ],
+              ),
+              Padding(
+                padding: const EdgeInsetsDirectional.fromSTEB(24.0, 24.0, 24.0, 0.0),
+                child: Row(
+                  mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'Your Earning',
+                      style: FlutterFlowTheme.of(context).labelMedium,
+                    ),
+                    Text(
+                      formatNumber(
+                        functions.getEmployeeEarning(
+                            functions
+                                .calculateBasePrice(
+                                    villasBookingDetailsVillasRecord.price,
+                                    widget.startDate!,
+                                    widget.endDate!)!
+                                .toDouble(),
+                            villasBookingDetailsVillasRecord.employeePer
+                                .toDouble()),
+                        formatType: FormatType.decimal,
+                        decimalType: DecimalType.automatic,
+                        currency: '₹',
+                      ),
+                      style: FlutterFlowTheme.of(context).bodyLarge,
+                    ),
+                  ],
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsetsDirectional.fromSTEB(24.0, 24.0, 24.0, 0.0),
+                child: Row(
+                  mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'Check in date',
+                      style: FlutterFlowTheme.of(context).labelMedium,
+                    ),
+                    Text(
+                      dateTimeFormat('yMMMd', widget.startDate),
+                      style: FlutterFlowTheme.of(context).bodyLarge,
+                    ),
+                  ],
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsetsDirectional.fromSTEB(24.0, 24.0, 24.0, 0.0),
+                child: Row(
+                  mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'Check out date',
+                      style: FlutterFlowTheme.of(context).labelMedium,
+                    ),
+                    Text(
+                      dateTimeFormat('yMMMd', widget.endDate),
+                      style: FlutterFlowTheme.of(context).bodyLarge,
+                    ),
+                  ],
+                ),
+              ),
+              Align(
+                alignment: const AlignmentDirectional(0.0, 1.0),
+                child: Padding(
+                  padding:
+                      const EdgeInsetsDirectional.fromSTEB(24.0, 12.0, 24.0, 0.0),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.max,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      Text(
+                        'Total',
+                        style:
+                            FlutterFlowTheme.of(context).headlineSmall.override(
+                                  fontFamily: 'Outfit',
+                                  fontWeight: FontWeight.normal,
+                                ),
+                      ),
+                      Text(
+                        formatNumber(
+                          functions.calculateBasePrice(
+                              villasBookingDetailsVillasRecord.price,
+                              widget.startDate!,
+                              widget.endDate!),
+                          formatType: FormatType.custom,
+                          currency: '₹',
+                          format: '',
+                          locale: '',
+                        ),
+                        style: FlutterFlowTheme.of(context).displaySmall,
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              const Opacity(
+                opacity: 0.4,
+                child: Divider(
+                  thickness: 1.0,
+                  color: Color(0xFF747373),
+                ),
+              ),
+              Form(
+                key: _model.formKey,
+                autovalidateMode: AutovalidateMode.disabled,
                 child: SingleChildScrollView(
                   child: Column(
                     mainAxisSize: MainAxisSize.max,
                     mainAxisAlignment: MainAxisAlignment.end,
-                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Padding(
-                        padding:
-                            const EdgeInsetsDirectional.fromSTEB(0.0, 12.0, 0.0, 0.0),
-                        child: Row(
-                          mainAxisSize: MainAxisSize.max,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Flexible(
-                              child: Row(
-                                mainAxisSize: MainAxisSize.max,
-                                children: [
-                                  Align(
-                                    alignment: const AlignmentDirectional(-1.0, 0.0),
-                                    child: Padding(
-                                      padding: const EdgeInsetsDirectional.fromSTEB(
-                                          22.0, 0.0, 0.0, 0.0),
-                                      child: ClipRRect(
-                                        borderRadius:
-                                            BorderRadius.circular(8.0),
-                                        child: Image.network(
-                                          villasBookingDetailsVillasRecord
-                                              .phoUrl,
-                                          width:
-                                              MediaQuery.sizeOf(context).width *
-                                                  0.886,
-                                          height: 228.0,
-                                          fit: BoxFit.cover,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  Align(
-                                    alignment: const AlignmentDirectional(-1.0, 0.0),
-                                    child: Container(
-                                      decoration: const BoxDecoration(),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ],
+                      Align(
+                        alignment: const AlignmentDirectional(-1.0, 0.0),
+                        child: Padding(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
+                              24.0, 0.0, 0.0, 0.0),
+                          child: Text(
+                            'Fill the guest details',
+                            style: FlutterFlowTheme.of(context)
+                                .bodyMedium
+                                .override(
+                                  fontFamily: 'Plus Jakarta Sans',
+                                  fontWeight: FontWeight.w600,
+                                ),
+                          ),
                         ),
                       ),
-                      Column(
-                        mainAxisSize: MainAxisSize.max,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsetsDirectional.fromSTEB(
-                                16.0, 12.0, 0.0, 0.0),
-                            child: Text(
-                              villasBookingDetailsVillasRecord.displayName,
-                              style: FlutterFlowTheme.of(context)
-                                  .headlineMedium
-                                  .override(
-                                    fontFamily: 'Outfit',
-                                    fontSize: 20.0,
-                                  ),
+                      Padding(
+                        padding: const EdgeInsetsDirectional.fromSTEB(
+                            24.0, 10.0, 24.0, 0.0),
+                        child: TextFormField(
+                          controller: _model.nameController,
+                          focusNode: _model.nameFocusNode,
+                          autofocus: true,
+                          obscureText: false,
+                          decoration: InputDecoration(
+                            labelText: '        Guest Name (Any one)',
+                            labelStyle:
+                                FlutterFlowTheme.of(context).labelMedium,
+                            hintStyle: FlutterFlowTheme.of(context).labelMedium,
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: FlutterFlowTheme.of(context).alternate,
+                                width: 2.0,
+                              ),
+                              borderRadius: BorderRadius.circular(8.0),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: FlutterFlowTheme.of(context).primary,
+                                width: 2.0,
+                              ),
+                              borderRadius: BorderRadius.circular(8.0),
+                            ),
+                            errorBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: FlutterFlowTheme.of(context).error,
+                                width: 2.0,
+                              ),
+                              borderRadius: BorderRadius.circular(8.0),
+                            ),
+                            focusedErrorBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: FlutterFlowTheme.of(context).error,
+                                width: 2.0,
+                              ),
+                              borderRadius: BorderRadius.circular(8.0),
                             ),
                           ),
-                          Padding(
-                            padding: const EdgeInsetsDirectional.fromSTEB(
-                                16.0, 8.0, 0.0, 0.0),
-                            child: Text(
-                              villasBookingDetailsVillasRecord.location,
-                              style: FlutterFlowTheme.of(context).labelMedium,
+                          style:
+                              FlutterFlowTheme.of(context).bodyMedium.override(
+                                    fontFamily: 'Plus Jakarta Sans',
+                                    fontSize: 14.0,
+                                    fontWeight: FontWeight.normal,
+                                  ),
+                          validator: _model.nameControllerValidator
+                              .asValidator(context),
+                        ),
+                      ),
+                      Row(
+                        mainAxisSize: MainAxisSize.max,
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          Align(
+                            alignment: const AlignmentDirectional(-1.0, 0.0),
+                            child: Padding(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
+                                  24.0, 5.0, 0.0, 0.0),
+                              child: FlutterFlowChoiceChips(
+                                options: const [
+                                  ChipData('Male', Icons.male_outlined),
+                                  ChipData('Female', Icons.female_sharp)
+                                ],
+                                onChanged: (val) => setState(
+                                    () => _model.choiceChipsValue = val?.first),
+                                selectedChipStyle: ChipStyle(
+                                  backgroundColor:
+                                      FlutterFlowTheme.of(context).lineColor,
+                                  textStyle: FlutterFlowTheme.of(context)
+                                      .bodyMedium
+                                      .override(
+                                        fontFamily: 'Plus Jakarta Sans',
+                                        color: FlutterFlowTheme.of(context)
+                                            .primaryText,
+                                      ),
+                                  iconColor: const Color(0xFF606060),
+                                  iconSize: 18.0,
+                                  elevation: 2.0,
+                                  borderColor: const Color(0xFF464646),
+                                  borderRadius: BorderRadius.circular(16.0),
+                                ),
+                                unselectedChipStyle: ChipStyle(
+                                  backgroundColor: const Color(0xFFD0D0D0),
+                                  textStyle: FlutterFlowTheme.of(context)
+                                      .bodyMedium
+                                      .override(
+                                        fontFamily: 'Plus Jakarta Sans',
+                                        color: FlutterFlowTheme.of(context)
+                                            .secondaryText,
+                                      ),
+                                  iconColor: FlutterFlowTheme.of(context)
+                                      .secondaryText,
+                                  iconSize: 18.0,
+                                  elevation: 0.0,
+                                  borderRadius: BorderRadius.circular(16.0),
+                                ),
+                                chipSpacing: 12.0,
+                                rowSpacing: 12.0,
+                                multiselect: false,
+                                alignment: WrapAlignment.start,
+                                controller:
+                                    _model.choiceChipsValueController ??=
+                                        FormFieldController<List<String>>(
+                                  [],
+                                ),
+                                wrapped: true,
+                              ),
+                            ),
+                          ),
+                          Expanded(
+                            child: Padding(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
+                                  24.0, 10.0, 24.0, 0.0),
+                              child: TextFormField(
+                                controller: _model.ageController,
+                                focusNode: _model.ageFocusNode,
+                                autofocus: true,
+                                obscureText: false,
+                                decoration: InputDecoration(
+                                  labelText: 'Age',
+                                  labelStyle:
+                                      FlutterFlowTheme.of(context).labelMedium,
+                                  hintStyle:
+                                      FlutterFlowTheme.of(context).labelMedium,
+                                  enabledBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color: FlutterFlowTheme.of(context)
+                                          .alternate,
+                                      width: 2.0,
+                                    ),
+                                    borderRadius: BorderRadius.circular(8.0),
+                                  ),
+                                  focusedBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color:
+                                          FlutterFlowTheme.of(context).primary,
+                                      width: 2.0,
+                                    ),
+                                    borderRadius: BorderRadius.circular(8.0),
+                                  ),
+                                  errorBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color: FlutterFlowTheme.of(context).error,
+                                      width: 2.0,
+                                    ),
+                                    borderRadius: BorderRadius.circular(8.0),
+                                  ),
+                                  focusedErrorBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color: FlutterFlowTheme.of(context).error,
+                                      width: 2.0,
+                                    ),
+                                    borderRadius: BorderRadius.circular(8.0),
+                                  ),
+                                ),
+                                style: FlutterFlowTheme.of(context)
+                                    .bodyMedium
+                                    .override(
+                                      fontFamily: 'Plus Jakarta Sans',
+                                      fontSize: 14.0,
+                                      fontWeight: FontWeight.normal,
+                                    ),
+                                keyboardType: TextInputType.number,
+                                validator: _model.ageControllerValidator
+                                    .asValidator(context),
+                              ),
                             ),
                           ),
                         ],
                       ),
                       Padding(
                         padding: const EdgeInsetsDirectional.fromSTEB(
-                            24.0, 24.0, 24.0, 0.0),
+                            24.0, 10.0, 24.0, 0.0),
+                        child: TextFormField(
+                          controller: _model.contactController,
+                          focusNode: _model.contactFocusNode,
+                          autofocus: true,
+                          obscureText: false,
+                          decoration: InputDecoration(
+                            labelText: '        Contact Number',
+                            labelStyle:
+                                FlutterFlowTheme.of(context).labelMedium,
+                            hintStyle: FlutterFlowTheme.of(context).labelMedium,
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: FlutterFlowTheme.of(context).alternate,
+                                width: 2.0,
+                              ),
+                              borderRadius: BorderRadius.circular(8.0),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: FlutterFlowTheme.of(context).primary,
+                                width: 2.0,
+                              ),
+                              borderRadius: BorderRadius.circular(8.0),
+                            ),
+                            errorBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: FlutterFlowTheme.of(context).error,
+                                width: 2.0,
+                              ),
+                              borderRadius: BorderRadius.circular(8.0),
+                            ),
+                            focusedErrorBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: FlutterFlowTheme.of(context).error,
+                                width: 2.0,
+                              ),
+                              borderRadius: BorderRadius.circular(8.0),
+                            ),
+                          ),
+                          style:
+                              FlutterFlowTheme.of(context).bodyMedium.override(
+                                    fontFamily: 'Plus Jakarta Sans',
+                                    fontSize: 14.0,
+                                    fontWeight: FontWeight.normal,
+                                  ),
+                          maxLength: 10,
+                          maxLengthEnforcement: MaxLengthEnforcement.none,
+                          buildCounter: (context,
+                                  {required currentLength,
+                                  required isFocused,
+                                  maxLength}) =>
+                              null,
+                          keyboardType: TextInputType.number,
+                          validator: _model.contactControllerValidator
+                              .asValidator(context),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsetsDirectional.fromSTEB(
+                            24.0, 10.0, 24.0, 0.0),
+                        child: TextFormField(
+                          controller: _model.verificationController,
+                          focusNode: _model.verificationFocusNode,
+                          autofocus: true,
+                          obscureText: false,
+                          decoration: InputDecoration(
+                            labelText: '        Verifcation ID',
+                            labelStyle:
+                                FlutterFlowTheme.of(context).labelMedium,
+                            hintStyle: FlutterFlowTheme.of(context).labelMedium,
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: FlutterFlowTheme.of(context).alternate,
+                                width: 2.0,
+                              ),
+                              borderRadius: BorderRadius.circular(8.0),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: FlutterFlowTheme.of(context).primary,
+                                width: 2.0,
+                              ),
+                              borderRadius: BorderRadius.circular(8.0),
+                            ),
+                            errorBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: FlutterFlowTheme.of(context).error,
+                                width: 2.0,
+                              ),
+                              borderRadius: BorderRadius.circular(8.0),
+                            ),
+                            focusedErrorBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: FlutterFlowTheme.of(context).error,
+                                width: 2.0,
+                              ),
+                              borderRadius: BorderRadius.circular(8.0),
+                            ),
+                          ),
+                          style: FlutterFlowTheme.of(context).bodyMedium,
+                          validator: _model.verificationControllerValidator
+                              .asValidator(context),
+                        ),
+                      ),
+                      Padding(
+                        padding:
+                            const EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
                         child: Row(
                           mainAxisSize: MainAxisSize.max,
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text(
-                              'Your Earning',
-                              style: FlutterFlowTheme.of(context).labelMedium,
+                            Padding(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
+                                  40.0, 0.0, 0.0, 0.0),
+                              child: Text(
+                                'Total Adult',
+                                style: FlutterFlowTheme.of(context).labelMedium,
+                              ),
                             ),
-                            Text(
-                              formatNumber(
-                                functions.getEmployeeEarning(
-                                    functions
-                                        .calculateBasePrice(
+                            Align(
+                              alignment: const AlignmentDirectional(1.0, 0.0),
+                              child: Padding(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                    24.0, 0.0, 24.0, 0.0),
+                                child: Container(
+                                  width: 160.0,
+                                  height: 50.0,
+                                  decoration: BoxDecoration(
+                                    color: FlutterFlowTheme.of(context)
+                                        .secondaryBackground,
+                                    borderRadius: BorderRadius.circular(8.0),
+                                    shape: BoxShape.rectangle,
+                                    border: Border.all(
+                                      color: FlutterFlowTheme.of(context)
+                                          .alternate,
+                                      width: 2.0,
+                                    ),
+                                  ),
+                                  child: FlutterFlowCountController(
+                                    decrementIconBuilder: (enabled) => FaIcon(
+                                      FontAwesomeIcons.minus,
+                                      color: enabled
+                                          ? FlutterFlowTheme.of(context)
+                                              .secondaryText
+                                          : FlutterFlowTheme.of(context)
+                                              .alternate,
+                                      size: 20.0,
+                                    ),
+                                    incrementIconBuilder: (enabled) => FaIcon(
+                                      FontAwesomeIcons.plus,
+                                      color: enabled
+                                          ? FlutterFlowTheme.of(context).primary
+                                          : FlutterFlowTheme.of(context)
+                                              .alternate,
+                                      size: 20.0,
+                                    ),
+                                    countBuilder: (count) => Text(
+                                      count.toString(),
+                                      style: FlutterFlowTheme.of(context)
+                                          .titleLarge,
+                                    ),
+                                    count: _model.countControlleradultValue ??=
+                                        0,
+                                    updateCount: (count) async {
+                                      setState(() => _model
+                                          .countControlleradultValue = count);
+                                      if (_model.countControlleradultValue! <
+                                          0) {
+                                        setState(() {
+                                          _model.countControlleradultValue = 0;
+                                        });
+                                      } else {
+                                        if (_model.countControlleradultValue! >
                                             villasBookingDetailsVillasRecord
-                                                .price,
-                                            widget.startDate!,
-                                            widget.endDate!)!
-                                        .toDouble(),
-                                    villasBookingDetailsVillasRecord.employeePer
-                                        .toDouble()),
-                                formatType: FormatType.decimal,
-                                decimalType: DecimalType.automatic,
-                                currency: '₹',
+                                                .maxAdult) {
+                                          setState(() {
+                                            _model.countControlleradultValue =
+                                                villasBookingDetailsVillasRecord
+                                                    .maxAdult;
+                                          });
+                                          ScaffoldMessenger.of(context)
+                                              .clearSnackBars();
+                                          ScaffoldMessenger.of(context)
+                                              .showSnackBar(
+                                            SnackBar(
+                                              content: Text(
+                                                'Your have reached the max adult Limit',
+                                                style: TextStyle(
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .primaryText,
+                                                ),
+                                              ),
+                                              duration:
+                                                  const Duration(milliseconds: 2350),
+                                              backgroundColor:
+                                                  FlutterFlowTheme.of(context)
+                                                      .error,
+                                            ),
+                                          );
+                                        }
+                                      }
+                                    },
+                                    stepSize: 1,
+                                  ),
+                                ),
                               ),
-                              style: FlutterFlowTheme.of(context).bodyLarge,
                             ),
                           ],
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsetsDirectional.fromSTEB(
-                            24.0, 24.0, 24.0, 0.0),
+                        padding:
+                            const EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
                         child: Row(
                           mainAxisSize: MainAxisSize.max,
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text(
-                              'Check in date',
-                              style: FlutterFlowTheme.of(context).labelMedium,
-                            ),
-                            Text(
-                              dateTimeFormat('yMMMd', widget.startDate),
-                              style: FlutterFlowTheme.of(context).bodyLarge,
-                            ),
-                          ],
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsetsDirectional.fromSTEB(
-                            24.0, 24.0, 24.0, 0.0),
-                        child: Row(
-                          mainAxisSize: MainAxisSize.max,
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              'Check out date',
-                              style: FlutterFlowTheme.of(context).labelMedium,
-                            ),
-                            Text(
-                              dateTimeFormat('yMMMd', widget.endDate),
-                              style: FlutterFlowTheme.of(context).bodyLarge,
-                            ),
-                          ],
-                        ),
-                      ),
-                      Align(
-                        alignment: const AlignmentDirectional(0.0, 1.0),
-                        child: Padding(
-                          padding: const EdgeInsetsDirectional.fromSTEB(
-                              24.0, 12.0, 24.0, 0.0),
-                          child: Row(
-                            mainAxisSize: MainAxisSize.max,
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            crossAxisAlignment: CrossAxisAlignment.end,
-                            children: [
-                              Text(
-                                'Total',
-                                style: FlutterFlowTheme.of(context)
-                                    .headlineSmall
-                                    .override(
-                                      fontFamily: 'Outfit',
-                                      fontWeight: FontWeight.normal,
-                                    ),
+                            Padding(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
+                                  40.0, 0.0, 0.0, 0.0),
+                              child: Text(
+                                'Total Children',
+                                style: FlutterFlowTheme.of(context).labelMedium,
                               ),
-                              Text(
-                                formatNumber(
-                                  functions.calculateBasePrice(
-                                      villasBookingDetailsVillasRecord.price,
-                                      widget.startDate!,
-                                      widget.endDate!),
-                                  formatType: FormatType.custom,
-                                  currency: '₹',
-                                  format: '',
-                                  locale: '',
-                                ),
-                                style:
-                                    FlutterFlowTheme.of(context).displaySmall,
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                      const Opacity(
-                        opacity: 0.4,
-                        child: Divider(
-                          thickness: 1.0,
-                          color: Color(0xFF747373),
-                        ),
-                      ),
-                      Form(
-                        key: _model.formKey,
-                        autovalidateMode: AutovalidateMode.disabled,
-                        child: SingleChildScrollView(
-                          child: Column(
-                            mainAxisSize: MainAxisSize.max,
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children: [
-                              Align(
-                                alignment: const AlignmentDirectional(-1.0, 0.0),
-                                child: Padding(
-                                  padding: const EdgeInsetsDirectional.fromSTEB(
-                                      24.0, 0.0, 0.0, 0.0),
-                                  child: Text(
-                                    'Fill the guest details',
-                                    style: FlutterFlowTheme.of(context)
-                                        .bodyMedium
-                                        .override(
-                                          fontFamily: 'Plus Jakarta Sans',
-                                          fontWeight: FontWeight.w600,
-                                        ),
-                                  ),
-                                ),
-                              ),
-                              Padding(
+                            ),
+                            Align(
+                              alignment: const AlignmentDirectional(1.0, 0.0),
+                              child: Padding(
                                 padding: const EdgeInsetsDirectional.fromSTEB(
-                                    24.0, 10.0, 24.0, 0.0),
-                                child: TextFormField(
-                                  controller: _model.nameController,
-                                  focusNode: _model.nameFocusNode,
-                                  autofocus: true,
-                                  obscureText: false,
-                                  decoration: InputDecoration(
-                                    labelText: '        Guest Name (Any one)',
-                                    labelStyle: FlutterFlowTheme.of(context)
-                                        .labelMedium,
-                                    hintStyle: FlutterFlowTheme.of(context)
-                                        .labelMedium,
-                                    enabledBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(
-                                        color: FlutterFlowTheme.of(context)
-                                            .alternate,
-                                        width: 2.0,
-                                      ),
-                                      borderRadius: BorderRadius.circular(8.0),
-                                    ),
-                                    focusedBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(
-                                        color: FlutterFlowTheme.of(context)
-                                            .primary,
-                                        width: 2.0,
-                                      ),
-                                      borderRadius: BorderRadius.circular(8.0),
-                                    ),
-                                    errorBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(
-                                        color:
-                                            FlutterFlowTheme.of(context).error,
-                                        width: 2.0,
-                                      ),
-                                      borderRadius: BorderRadius.circular(8.0),
-                                    ),
-                                    focusedErrorBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(
-                                        color:
-                                            FlutterFlowTheme.of(context).error,
-                                        width: 2.0,
-                                      ),
-                                      borderRadius: BorderRadius.circular(8.0),
+                                    24.0, 0.0, 24.0, 0.0),
+                                child: Container(
+                                  width: 160.0,
+                                  height: 50.0,
+                                  decoration: BoxDecoration(
+                                    color: FlutterFlowTheme.of(context)
+                                        .secondaryBackground,
+                                    borderRadius: BorderRadius.circular(8.0),
+                                    shape: BoxShape.rectangle,
+                                    border: Border.all(
+                                      color: FlutterFlowTheme.of(context)
+                                          .alternate,
+                                      width: 2.0,
                                     ),
                                   ),
-                                  style: FlutterFlowTheme.of(context)
-                                      .bodyMedium
-                                      .override(
-                                        fontFamily: 'Plus Jakarta Sans',
-                                        fontSize: 14.0,
-                                        fontWeight: FontWeight.normal,
-                                      ),
-                                  validator: _model.nameControllerValidator
-                                      .asValidator(context),
-                                ),
-                              ),
-                              Row(
-                                mainAxisSize: MainAxisSize.max,
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceAround,
-                                children: [
-                                  Align(
-                                    alignment: const AlignmentDirectional(-1.0, 0.0),
-                                    child: Padding(
-                                      padding: const EdgeInsetsDirectional.fromSTEB(
-                                          24.0, 5.0, 0.0, 0.0),
-                                      child: FlutterFlowChoiceChips(
-                                        options: const [
-                                          ChipData('Male', Icons.male_outlined),
-                                          ChipData('Female', Icons.female_sharp)
-                                        ],
-                                        onChanged: (val) => setState(() =>
-                                            _model.choiceChipsValue =
-                                                val?.first),
-                                        selectedChipStyle: ChipStyle(
-                                          backgroundColor:
-                                              FlutterFlowTheme.of(context)
-                                                  .lineColor,
-                                          textStyle: FlutterFlowTheme.of(
-                                                  context)
-                                              .bodyMedium
-                                              .override(
-                                                fontFamily: 'Plus Jakarta Sans',
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .primaryText,
-                                              ),
-                                          iconColor: const Color(0xFF606060),
-                                          iconSize: 18.0,
-                                          elevation: 2.0,
-                                          borderColor: const Color(0xFF464646),
-                                          borderRadius:
-                                              BorderRadius.circular(16.0),
-                                        ),
-                                        unselectedChipStyle: ChipStyle(
-                                          backgroundColor: const Color(0xFFD0D0D0),
-                                          textStyle: FlutterFlowTheme.of(
-                                                  context)
-                                              .bodyMedium
-                                              .override(
-                                                fontFamily: 'Plus Jakarta Sans',
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .secondaryText,
-                                              ),
-                                          iconColor:
-                                              FlutterFlowTheme.of(context)
-                                                  .secondaryText,
-                                          iconSize: 18.0,
-                                          elevation: 0.0,
-                                          borderRadius:
-                                              BorderRadius.circular(16.0),
-                                        ),
-                                        chipSpacing: 12.0,
-                                        rowSpacing: 12.0,
-                                        multiselect: false,
-                                        alignment: WrapAlignment.start,
-                                        controller: _model
-                                                .choiceChipsValueController ??=
-                                            FormFieldController<List<String>>(
-                                          [],
-                                        ),
-                                        wrapped: true,
-                                      ),
+                                  child: FlutterFlowCountController(
+                                    decrementIconBuilder: (enabled) => FaIcon(
+                                      FontAwesomeIcons.minus,
+                                      color: enabled
+                                          ? FlutterFlowTheme.of(context)
+                                              .secondaryText
+                                          : FlutterFlowTheme.of(context)
+                                              .alternate,
+                                      size: 20.0,
                                     ),
-                                  ),
-                                  Expanded(
-                                    child: Padding(
-                                      padding: const EdgeInsetsDirectional.fromSTEB(
-                                          24.0, 10.0, 24.0, 0.0),
-                                      child: TextFormField(
-                                        controller: _model.ageController,
-                                        focusNode: _model.ageFocusNode,
-                                        autofocus: true,
-                                        obscureText: false,
-                                        decoration: InputDecoration(
-                                          labelText: 'Age',
-                                          labelStyle:
-                                              FlutterFlowTheme.of(context)
-                                                  .labelMedium,
-                                          hintStyle:
-                                              FlutterFlowTheme.of(context)
-                                                  .labelMedium,
-                                          enabledBorder: OutlineInputBorder(
-                                            borderSide: BorderSide(
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .alternate,
-                                              width: 2.0,
-                                            ),
-                                            borderRadius:
-                                                BorderRadius.circular(8.0),
-                                          ),
-                                          focusedBorder: OutlineInputBorder(
-                                            borderSide: BorderSide(
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .primary,
-                                              width: 2.0,
-                                            ),
-                                            borderRadius:
-                                                BorderRadius.circular(8.0),
-                                          ),
-                                          errorBorder: OutlineInputBorder(
-                                            borderSide: BorderSide(
-                                              color:
+                                    incrementIconBuilder: (enabled) => FaIcon(
+                                      FontAwesomeIcons.plus,
+                                      color: enabled
+                                          ? FlutterFlowTheme.of(context).primary
+                                          : FlutterFlowTheme.of(context)
+                                              .alternate,
+                                      size: 20.0,
+                                    ),
+                                    countBuilder: (count) => Text(
+                                      count.toString(),
+                                      style: FlutterFlowTheme.of(context)
+                                          .titleLarge,
+                                    ),
+                                    count: _model
+                                        .countControllerchildrenValue ??= 0,
+                                    updateCount: (count) async {
+                                      setState(() =>
+                                          _model.countControllerchildrenValue =
+                                              count);
+                                      if (_model.countControllerchildrenValue! <
+                                          0) {
+                                        setState(() {
+                                          _model.countControllerchildrenValue =
+                                              0;
+                                        });
+                                      } else {
+                                        if (_model
+                                                .countControllerchildrenValue! >
+                                            villasBookingDetailsVillasRecord
+                                                .maxChildren) {
+                                          setState(() {
+                                            _model.countControllerchildrenValue =
+                                                villasBookingDetailsVillasRecord
+                                                    .maxChildren;
+                                          });
+                                          ScaffoldMessenger.of(context)
+                                              .clearSnackBars();
+                                          ScaffoldMessenger.of(context)
+                                              .showSnackBar(
+                                            SnackBar(
+                                              content: Text(
+                                                'Your have reached the max children Limit',
+                                                style: TextStyle(
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .primaryText,
+                                                ),
+                                              ),
+                                              duration:
+                                                  const Duration(milliseconds: 2849),
+                                              backgroundColor:
                                                   FlutterFlowTheme.of(context)
                                                       .error,
-                                              width: 2.0,
                                             ),
-                                            borderRadius:
-                                                BorderRadius.circular(8.0),
-                                          ),
-                                          focusedErrorBorder:
-                                              OutlineInputBorder(
-                                            borderSide: BorderSide(
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .error,
-                                              width: 2.0,
-                                            ),
-                                            borderRadius:
-                                                BorderRadius.circular(8.0),
-                                          ),
-                                        ),
-                                        style: FlutterFlowTheme.of(context)
-                                            .bodyMedium
-                                            .override(
-                                              fontFamily: 'Plus Jakarta Sans',
-                                              fontSize: 14.0,
-                                              fontWeight: FontWeight.normal,
-                                            ),
-                                        keyboardType: TextInputType.number,
-                                        validator: _model.ageControllerValidator
-                                            .asValidator(context),
-                                      ),
-                                    ),
+                                          );
+                                        }
+                                      }
+                                    },
+                                    stepSize: 1,
                                   ),
-                                ],
-                              ),
-                              Padding(
-                                padding: const EdgeInsetsDirectional.fromSTEB(
-                                    24.0, 10.0, 24.0, 0.0),
-                                child: TextFormField(
-                                  controller: _model.contactController,
-                                  focusNode: _model.contactFocusNode,
-                                  autofocus: true,
-                                  obscureText: false,
-                                  decoration: InputDecoration(
-                                    labelText: '        Contact Number',
-                                    labelStyle: FlutterFlowTheme.of(context)
-                                        .labelMedium,
-                                    hintStyle: FlutterFlowTheme.of(context)
-                                        .labelMedium,
-                                    enabledBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(
-                                        color: FlutterFlowTheme.of(context)
-                                            .alternate,
-                                        width: 2.0,
-                                      ),
-                                      borderRadius: BorderRadius.circular(8.0),
-                                    ),
-                                    focusedBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(
-                                        color: FlutterFlowTheme.of(context)
-                                            .primary,
-                                        width: 2.0,
-                                      ),
-                                      borderRadius: BorderRadius.circular(8.0),
-                                    ),
-                                    errorBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(
-                                        color:
-                                            FlutterFlowTheme.of(context).error,
-                                        width: 2.0,
-                                      ),
-                                      borderRadius: BorderRadius.circular(8.0),
-                                    ),
-                                    focusedErrorBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(
-                                        color:
-                                            FlutterFlowTheme.of(context).error,
-                                        width: 2.0,
-                                      ),
-                                      borderRadius: BorderRadius.circular(8.0),
-                                    ),
-                                  ),
-                                  style: FlutterFlowTheme.of(context)
-                                      .bodyMedium
-                                      .override(
-                                        fontFamily: 'Plus Jakarta Sans',
-                                        fontSize: 14.0,
-                                        fontWeight: FontWeight.normal,
-                                      ),
-                                  maxLength: 10,
-                                  maxLengthEnforcement:
-                                      MaxLengthEnforcement.none,
-                                  buildCounter: (context,
-                                          {required currentLength,
-                                          required isFocused,
-                                          maxLength}) =>
-                                      null,
-                                  keyboardType: TextInputType.number,
-                                  validator: _model.contactControllerValidator
-                                      .asValidator(context),
                                 ),
                               ),
-                              Padding(
-                                padding: const EdgeInsetsDirectional.fromSTEB(
-                                    24.0, 10.0, 24.0, 0.0),
-                                child: TextFormField(
-                                  controller: _model.verificationController,
-                                  focusNode: _model.verificationFocusNode,
-                                  autofocus: true,
-                                  obscureText: false,
-                                  decoration: InputDecoration(
-                                    labelText: '        Verifcation ID',
-                                    labelStyle: FlutterFlowTheme.of(context)
-                                        .labelMedium,
-                                    hintStyle: FlutterFlowTheme.of(context)
-                                        .labelMedium,
-                                    enabledBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(
-                                        color: FlutterFlowTheme.of(context)
-                                            .alternate,
-                                        width: 2.0,
-                                      ),
-                                      borderRadius: BorderRadius.circular(8.0),
-                                    ),
-                                    focusedBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(
-                                        color: FlutterFlowTheme.of(context)
-                                            .primary,
-                                        width: 2.0,
-                                      ),
-                                      borderRadius: BorderRadius.circular(8.0),
-                                    ),
-                                    errorBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(
-                                        color:
-                                            FlutterFlowTheme.of(context).error,
-                                        width: 2.0,
-                                      ),
-                                      borderRadius: BorderRadius.circular(8.0),
-                                    ),
-                                    focusedErrorBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(
-                                        color:
-                                            FlutterFlowTheme.of(context).error,
-                                        width: 2.0,
-                                      ),
-                                      borderRadius: BorderRadius.circular(8.0),
-                                    ),
-                                  ),
-                                  style:
-                                      FlutterFlowTheme.of(context).bodyMedium,
-                                  validator: _model
-                                      .verificationControllerValidator
-                                      .asValidator(context),
-                                ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsetsDirectional.fromSTEB(
-                                    0.0, 10.0, 0.0, 0.0),
-                                child: Row(
-                                  mainAxisSize: MainAxisSize.max,
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Padding(
-                                      padding: const EdgeInsetsDirectional.fromSTEB(
-                                          40.0, 0.0, 0.0, 0.0),
-                                      child: Text(
-                                        'Total Adult',
-                                        style: FlutterFlowTheme.of(context)
-                                            .labelMedium,
-                                      ),
-                                    ),
-                                    Align(
-                                      alignment: const AlignmentDirectional(1.0, 0.0),
-                                      child: Padding(
-                                        padding: const EdgeInsetsDirectional.fromSTEB(
-                                            24.0, 0.0, 24.0, 0.0),
-                                        child: Container(
-                                          width: 160.0,
-                                          height: 50.0,
-                                          decoration: BoxDecoration(
-                                            color: FlutterFlowTheme.of(context)
-                                                .secondaryBackground,
-                                            borderRadius:
-                                                BorderRadius.circular(8.0),
-                                            shape: BoxShape.rectangle,
-                                            border: Border.all(
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .alternate,
-                                              width: 2.0,
-                                            ),
-                                          ),
-                                          child: FlutterFlowCountController(
-                                            decrementIconBuilder: (enabled) =>
-                                                FaIcon(
-                                              FontAwesomeIcons.minus,
-                                              color: enabled
-                                                  ? FlutterFlowTheme.of(context)
-                                                      .secondaryText
-                                                  : FlutterFlowTheme.of(context)
-                                                      .alternate,
-                                              size: 20.0,
-                                            ),
-                                            incrementIconBuilder: (enabled) =>
-                                                FaIcon(
-                                              FontAwesomeIcons.plus,
-                                              color: enabled
-                                                  ? FlutterFlowTheme.of(context)
-                                                      .primary
-                                                  : FlutterFlowTheme.of(context)
-                                                      .alternate,
-                                              size: 20.0,
-                                            ),
-                                            countBuilder: (count) => Text(
-                                              count.toString(),
-                                              style:
-                                                  FlutterFlowTheme.of(context)
-                                                      .titleLarge,
-                                            ),
-                                            count: _model
-                                                .countControlleradultValue ??= 0,
-                                            updateCount: (count) async {
-                                              setState(() => _model
-                                                      .countControlleradultValue =
-                                                  count);
-                                              if (_model
-                                                      .countControlleradultValue! <
-                                                  0) {
-                                                setState(() {
-                                                  _model.countControlleradultValue =
-                                                      0;
-                                                });
-                                              } else {
-                                                if (_model
-                                                        .countControlleradultValue! >
-                                                    villasBookingDetailsVillasRecord
-                                                        .maxAdult) {
-                                                  setState(() {
-                                                    _model.countControlleradultValue =
-                                                        villasBookingDetailsVillasRecord
-                                                            .maxAdult;
-                                                  });
-                                                  ScaffoldMessenger.of(context)
-                                                      .clearSnackBars();
-                                                  ScaffoldMessenger.of(context)
-                                                      .showSnackBar(
-                                                    SnackBar(
-                                                      content: Text(
-                                                        'Your have reached the max adult Limit',
-                                                        style: TextStyle(
-                                                          color: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .primaryText,
-                                                        ),
-                                                      ),
-                                                      duration: const Duration(
-                                                          milliseconds: 2350),
-                                                      backgroundColor:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .error,
-                                                    ),
-                                                  );
-                                                }
-                                              }
-                                            },
-                                            stepSize: 1,
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsetsDirectional.fromSTEB(
-                                    0.0, 10.0, 0.0, 0.0),
-                                child: Row(
-                                  mainAxisSize: MainAxisSize.max,
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Padding(
-                                      padding: const EdgeInsetsDirectional.fromSTEB(
-                                          40.0, 0.0, 0.0, 0.0),
-                                      child: Text(
-                                        'Total Children',
-                                        style: FlutterFlowTheme.of(context)
-                                            .labelMedium,
-                                      ),
-                                    ),
-                                    Align(
-                                      alignment: const AlignmentDirectional(1.0, 0.0),
-                                      child: Padding(
-                                        padding: const EdgeInsetsDirectional.fromSTEB(
-                                            24.0, 0.0, 24.0, 0.0),
-                                        child: Container(
-                                          width: 160.0,
-                                          height: 50.0,
-                                          decoration: BoxDecoration(
-                                            color: FlutterFlowTheme.of(context)
-                                                .secondaryBackground,
-                                            borderRadius:
-                                                BorderRadius.circular(8.0),
-                                            shape: BoxShape.rectangle,
-                                            border: Border.all(
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .alternate,
-                                              width: 2.0,
-                                            ),
-                                          ),
-                                          child: FlutterFlowCountController(
-                                            decrementIconBuilder: (enabled) =>
-                                                FaIcon(
-                                              FontAwesomeIcons.minus,
-                                              color: enabled
-                                                  ? FlutterFlowTheme.of(context)
-                                                      .secondaryText
-                                                  : FlutterFlowTheme.of(context)
-                                                      .alternate,
-                                              size: 20.0,
-                                            ),
-                                            incrementIconBuilder: (enabled) =>
-                                                FaIcon(
-                                              FontAwesomeIcons.plus,
-                                              color: enabled
-                                                  ? FlutterFlowTheme.of(context)
-                                                      .primary
-                                                  : FlutterFlowTheme.of(context)
-                                                      .alternate,
-                                              size: 20.0,
-                                            ),
-                                            countBuilder: (count) => Text(
-                                              count.toString(),
-                                              style:
-                                                  FlutterFlowTheme.of(context)
-                                                      .titleLarge,
-                                            ),
-                                            count: _model
-                                                .countControllerchildrenValue ??= 0,
-                                            updateCount: (count) async {
-                                              setState(() => _model
-                                                      .countControllerchildrenValue =
-                                                  count);
-                                              if (_model
-                                                      .countControllerchildrenValue! <
-                                                  0) {
-                                                setState(() {
-                                                  _model.countControllerchildrenValue =
-                                                      0;
-                                                });
-                                              } else {
-                                                if (_model
-                                                        .countControllerchildrenValue! >
-                                                    villasBookingDetailsVillasRecord
-                                                        .maxChildren) {
-                                                  setState(() {
-                                                    _model.countControllerchildrenValue =
-                                                        villasBookingDetailsVillasRecord
-                                                            .maxChildren;
-                                                  });
-                                                  ScaffoldMessenger.of(context)
-                                                      .clearSnackBars();
-                                                  ScaffoldMessenger.of(context)
-                                                      .showSnackBar(
-                                                    SnackBar(
-                                                      content: Text(
-                                                        'Your have reached the max children Limit',
-                                                        style: TextStyle(
-                                                          color: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .primaryText,
-                                                        ),
-                                                      ),
-                                                      duration: const Duration(
-                                                          milliseconds: 2849),
-                                                      backgroundColor:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .error,
-                                                    ),
-                                                  );
-                                                }
-                                              }
-                                            },
-                                            stepSize: 1,
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ],
-                          ),
+                            ),
+                          ],
                         ),
                       ),
                     ],

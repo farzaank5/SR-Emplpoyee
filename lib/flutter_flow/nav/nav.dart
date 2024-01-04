@@ -159,6 +159,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: 'employee_Profile',
           path: '/employeeProfile',
+          requireAuth: true,
           builder: (context, params) => params.isEmpty
               ? const NavBarPage(initialPage: 'employee_Profile')
               : const EmployeeProfileWidget(),

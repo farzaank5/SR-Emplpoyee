@@ -115,7 +115,7 @@ class _BookingHistoryWidgetState extends State<BookingHistoryWidget>
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Container(
-                  width: 412.0,
+                  width: double.infinity,
                   height: 61.0,
                   decoration: BoxDecoration(
                     color: FlutterFlowTheme.of(context).primaryBtnText,
@@ -126,32 +126,35 @@ class _BookingHistoryWidgetState extends State<BookingHistoryWidget>
                       mainAxisSize: MainAxisSize.max,
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
-                        Row(
-                          mainAxisSize: MainAxisSize.max,
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Align(
-                              alignment: const AlignmentDirectional(-1.0, 0.0),
-                              child: Padding(
-                                padding: const EdgeInsetsDirectional.fromSTEB(
-                                    16.0, 0.0, 0.0, 20.0),
-                                child: Text(
-                                  'History',
-                                  style: FlutterFlowTheme.of(context)
-                                      .headlineMedium,
+                        Container(
+                          decoration: const BoxDecoration(),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.max,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Align(
+                                alignment: const AlignmentDirectional(-1.0, 0.0),
+                                child: Padding(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
+                                      16.0, 0.0, 0.0, 20.0),
+                                  child: Text(
+                                    'History',
+                                    style: FlutterFlowTheme.of(context)
+                                        .headlineMedium,
+                                  ),
                                 ),
                               ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsetsDirectional.fromSTEB(
-                                  0.0, 0.0, 16.0, 0.0),
-                              child: Icon(
-                                Icons.work_history,
-                                color: FlutterFlowTheme.of(context).primary,
-                                size: 35.0,
+                              Padding(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                    0.0, 0.0, 16.0, 0.0),
+                                child: Icon(
+                                  Icons.work_history,
+                                  color: FlutterFlowTheme.of(context).primary,
+                                  size: 35.0,
+                                ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
                       ],
                     ),

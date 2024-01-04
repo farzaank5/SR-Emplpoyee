@@ -104,34 +104,38 @@ class _BookmarkedWidgetState extends State<BookmarkedWidget>
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Container(
-                    width: 412.0,
+                    width: double.infinity,
                     height: 48.0,
                     decoration: const BoxDecoration(
                       color: Colors.white,
                     ),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.max,
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsetsDirectional.fromSTEB(
-                              16.0, 0.0, 0.0, 0.0),
-                          child: Text(
-                            'Bookmarks',
-                            style: FlutterFlowTheme.of(context).headlineMedium,
+                    child: Container(
+                      decoration: const BoxDecoration(),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.max,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsetsDirectional.fromSTEB(
+                                16.0, 0.0, 0.0, 0.0),
+                            child: Text(
+                              'Bookmarks',
+                              style:
+                                  FlutterFlowTheme.of(context).headlineMedium,
+                            ),
                           ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsetsDirectional.fromSTEB(
-                              10.0, 0.0, 16.0, 0.0),
-                          child: FaIcon(
-                            FontAwesomeIcons.solidBookmark,
-                            color: FlutterFlowTheme.of(context).primary,
-                            size: 30.0,
+                          Padding(
+                            padding: const EdgeInsetsDirectional.fromSTEB(
+                                10.0, 0.0, 16.0, 0.0),
+                            child: FaIcon(
+                              FontAwesomeIcons.solidBookmark,
+                              color: FlutterFlowTheme.of(context).primary,
+                              size: 30.0,
+                            ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
                   Padding(

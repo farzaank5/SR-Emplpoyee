@@ -116,7 +116,7 @@ class _CurrentBookingsWidgetState extends State<CurrentBookingsWidget>
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Container(
-                  width: 412.0,
+                  width: double.infinity,
                   height: 61.0,
                   decoration: BoxDecoration(
                     color: FlutterFlowTheme.of(context).primaryBtnText,
@@ -127,32 +127,36 @@ class _CurrentBookingsWidgetState extends State<CurrentBookingsWidget>
                       mainAxisSize: MainAxisSize.max,
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
-                        Row(
-                          mainAxisSize: MainAxisSize.max,
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Align(
-                              alignment: const AlignmentDirectional(-1.0, 0.0),
-                              child: Padding(
-                                padding: const EdgeInsetsDirectional.fromSTEB(
-                                    16.0, 0.0, 0.0, 20.0),
-                                child: Text(
-                                  'Current Bookings',
-                                  style: FlutterFlowTheme.of(context)
-                                      .headlineMedium,
+                        Container(
+                          width: double.infinity,
+                          decoration: const BoxDecoration(),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.max,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Align(
+                                alignment: const AlignmentDirectional(-1.0, 0.0),
+                                child: Padding(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
+                                      16.0, 0.0, 0.0, 20.0),
+                                  child: Text(
+                                    'Current Bookings',
+                                    style: FlutterFlowTheme.of(context)
+                                        .headlineMedium,
+                                  ),
                                 ),
                               ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsetsDirectional.fromSTEB(
-                                  0.0, 0.0, 16.0, 0.0),
-                              child: FaIcon(
-                                FontAwesomeIcons.book,
-                                color: FlutterFlowTheme.of(context).primary,
-                                size: 35.0,
+                              Padding(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                    0.0, 0.0, 16.0, 0.0),
+                                child: FaIcon(
+                                  FontAwesomeIcons.book,
+                                  color: FlutterFlowTheme.of(context).primary,
+                                  size: 35.0,
+                                ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
                       ],
                     ),
