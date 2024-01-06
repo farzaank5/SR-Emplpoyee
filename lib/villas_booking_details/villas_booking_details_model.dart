@@ -37,11 +37,11 @@ class VillasBookingDetailsModel
       return 'Field is required';
     }
 
-    if (val.length < 10) {
-      return 'Requires at least 10 characters.';
+    if (val.length < 2) {
+      return '2';
     }
-    if (val.length > 10) {
-      return 'Maximum 10 characters allowed, currently ${val.length}.';
+    if (val.length > 3) {
+      return '3';
     }
 
     return null;
