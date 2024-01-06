@@ -98,164 +98,168 @@ class _VillasDetailsWidgetState extends State<VillasDetailsWidget> {
             centerTitle: false,
             elevation: 0.0,
           ),
-          body: Column(
-            mainAxisSize: MainAxisSize.max,
-            children: [
-              Align(
-                alignment: const AlignmentDirectional(0.0, 1.0),
-                child: SingleChildScrollView(
-                  child: Column(
-                    mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Padding(
-                        padding:
-                            const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 0.0, 0.0),
-                        child: Text(
-                          'Booking Details',
-                          style: FlutterFlowTheme.of(context).headlineMedium,
+          body: SafeArea(
+            top: true,
+            child: Column(
+              mainAxisSize: MainAxisSize.max,
+              children: [
+                Align(
+                  alignment: const AlignmentDirectional(0.0, 1.0),
+                  child: SingleChildScrollView(
+                    child: Column(
+                      mainAxisSize: MainAxisSize.max,
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
+                              16.0, 0.0, 0.0, 0.0),
+                          child: Text(
+                            'Booking Details',
+                            style: FlutterFlowTheme.of(context).headlineMedium,
+                          ),
                         ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsetsDirectional.fromSTEB(
-                            16.0, 12.0, 0.0, 0.0),
-                        child: Text(
-                          villasDetailsBookingsRecord.name,
-                          style: FlutterFlowTheme.of(context).headlineMedium,
+                        Padding(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
+                              16.0, 12.0, 0.0, 0.0),
+                          child: Text(
+                            villasDetailsBookingsRecord.name,
+                            style: FlutterFlowTheme.of(context).headlineMedium,
+                          ),
                         ),
-                      ),
-                      Padding(
-                        padding:
-                            const EdgeInsetsDirectional.fromSTEB(16.0, 8.0, 0.0, 0.0),
-                        child: Text(
-                          villasDetailsBookingsRecord.location,
-                          style: FlutterFlowTheme.of(context).labelMedium,
+                        Padding(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
+                              16.0, 8.0, 0.0, 0.0),
+                          child: Text(
+                            villasDetailsBookingsRecord.location,
+                            style: FlutterFlowTheme.of(context).labelMedium,
+                          ),
                         ),
-                      ),
-                      Divider(
-                        height: 36.0,
-                        thickness: 1.0,
-                        color: FlutterFlowTheme.of(context).alternate,
-                      ),
-                      Padding(
-                        padding: const EdgeInsetsDirectional.fromSTEB(
-                            24.0, 24.0, 24.0, 0.0),
-                        child: Row(
-                          mainAxisSize: MainAxisSize.max,
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              'Earning',
-                              style: FlutterFlowTheme.of(context).labelMedium,
-                            ),
-                            Text(
-                              formatNumber(
-                                villasDetailsBookingsRecord.earnings,
-                                formatType: FormatType.decimal,
-                                decimalType: DecimalType.periodDecimal,
-                                currency: 'Rs.',
+                        Divider(
+                          height: 36.0,
+                          thickness: 1.0,
+                          color: FlutterFlowTheme.of(context).alternate,
+                        ),
+                        Padding(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
+                              24.0, 24.0, 24.0, 0.0),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.max,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                'Earning',
+                                style: FlutterFlowTheme.of(context).labelMedium,
                               ),
-                              style: FlutterFlowTheme.of(context).bodyLarge,
-                            ),
-                          ],
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsetsDirectional.fromSTEB(
-                            24.0, 24.0, 24.0, 0.0),
-                        child: Row(
-                          mainAxisSize: MainAxisSize.max,
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              'Booking Time',
-                              style: FlutterFlowTheme.of(context).labelMedium,
-                            ),
-                            Text(
-                              dateTimeFormat('MMMEd',
-                                  villasDetailsBookingsRecord.createdTime!),
-                              style: FlutterFlowTheme.of(context).bodyLarge,
-                            ),
-                          ],
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsetsDirectional.fromSTEB(
-                            24.0, 24.0, 24.0, 0.0),
-                        child: Row(
-                          mainAxisSize: MainAxisSize.max,
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              'Check in date',
-                              style: FlutterFlowTheme.of(context).labelMedium,
-                            ),
-                            Text(
-                              dateTimeFormat('yMMMd',
-                                  villasDetailsBookingsRecord.startDate!),
-                              style: FlutterFlowTheme.of(context).bodyLarge,
-                            ),
-                          ],
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsetsDirectional.fromSTEB(
-                            24.0, 24.0, 24.0, 0.0),
-                        child: Row(
-                          mainAxisSize: MainAxisSize.max,
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              'Check out date',
-                              style: FlutterFlowTheme.of(context).labelMedium,
-                            ),
-                            Text(
-                              dateTimeFormat('yMMMd',
-                                  villasDetailsBookingsRecord.endDate!),
-                              style: FlutterFlowTheme.of(context).bodyLarge,
-                            ),
-                          ],
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsetsDirectional.fromSTEB(
-                            24.0, 12.0, 24.0, 0.0),
-                        child: Row(
-                          mainAxisSize: MainAxisSize.max,
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              'Total Price',
-                              style: FlutterFlowTheme.of(context)
-                                  .headlineSmall
-                                  .override(
-                                    fontFamily: 'Outfit',
-                                    fontWeight: FontWeight.normal,
-                                  ),
-                            ),
-                            Text(
-                              formatNumber(
-                                villasDetailsBookingsRecord.price,
-                                formatType: FormatType.decimal,
-                                decimalType: DecimalType.periodDecimal,
-                                currency: 'Rs.',
+                              Text(
+                                formatNumber(
+                                  villasDetailsBookingsRecord.earnings,
+                                  formatType: FormatType.decimal,
+                                  decimalType: DecimalType.periodDecimal,
+                                  currency: 'Rs.',
+                                ),
+                                style: FlutterFlowTheme.of(context).bodyLarge,
                               ),
-                              style: FlutterFlowTheme.of(context).displaySmall,
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
-                      ),
-                    ],
+                        Padding(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
+                              24.0, 24.0, 24.0, 0.0),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.max,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                'Booking Time',
+                                style: FlutterFlowTheme.of(context).labelMedium,
+                              ),
+                              Text(
+                                dateTimeFormat('MMMEd',
+                                    villasDetailsBookingsRecord.createdTime!),
+                                style: FlutterFlowTheme.of(context).bodyLarge,
+                              ),
+                            ],
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
+                              24.0, 24.0, 24.0, 0.0),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.max,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                'Check in date',
+                                style: FlutterFlowTheme.of(context).labelMedium,
+                              ),
+                              Text(
+                                dateTimeFormat('yMMMd',
+                                    villasDetailsBookingsRecord.startDate!),
+                                style: FlutterFlowTheme.of(context).bodyLarge,
+                              ),
+                            ],
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
+                              24.0, 24.0, 24.0, 0.0),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.max,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                'Check out date',
+                                style: FlutterFlowTheme.of(context).labelMedium,
+                              ),
+                              Text(
+                                dateTimeFormat('yMMMd',
+                                    villasDetailsBookingsRecord.endDate!),
+                                style: FlutterFlowTheme.of(context).bodyLarge,
+                              ),
+                            ],
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
+                              24.0, 12.0, 24.0, 0.0),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.max,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                'Total Price',
+                                style: FlutterFlowTheme.of(context)
+                                    .headlineSmall
+                                    .override(
+                                      fontFamily: 'Outfit',
+                                      fontWeight: FontWeight.normal,
+                                    ),
+                              ),
+                              Text(
+                                formatNumber(
+                                  villasDetailsBookingsRecord.price,
+                                  formatType: FormatType.decimal,
+                                  decimalType: DecimalType.periodDecimal,
+                                  currency: 'Rs.',
+                                ),
+                                style:
+                                    FlutterFlowTheme.of(context).displaySmall,
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
-              ),
-              Divider(
-                height: 36.0,
-                thickness: 1.0,
-                color: FlutterFlowTheme.of(context).alternate,
-              ),
-            ],
+                Divider(
+                  height: 36.0,
+                  thickness: 1.0,
+                  color: FlutterFlowTheme.of(context).primary,
+                ),
+              ],
+            ),
           ),
         );
       },

@@ -7,6 +7,7 @@ class VillasBookingDetailsModel
     extends FlutterFlowModel<VillasBookingDetailsWidget> {
   ///  State fields for stateful widgets in this page.
 
+  final unfocusNode = FocusNode();
   final formKey = GlobalKey<FormState>();
   // State field(s) for name widget.
   FocusNode? nameFocusNode;
@@ -81,6 +82,7 @@ class VillasBookingDetailsModel
 
   @override
   void dispose() {
+    unfocusNode.dispose();
     nameFocusNode?.dispose();
     nameController?.dispose();
 
