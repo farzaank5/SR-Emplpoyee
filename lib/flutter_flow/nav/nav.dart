@@ -1,13 +1,23 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
+import '/backend/backend.dart';
+import '/backend/schema/structs/index.dart';
 
 import '/auth/base_auth_user_provider.dart';
 
+import '/backend/push_notifications/push_notifications_handler.dart'
+    show PushNotificationsHandler;
 import '/index.dart';
 import '/main.dart';
+import '/flutter_flow/flutter_flow_theme.dart';
+import '/flutter_flow/lat_lng.dart';
+import '/flutter_flow/place.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import 'serialization_util.dart';
 
 export 'package:go_router/go_router.dart';
 export 'serialization_util.dart';
@@ -72,18 +82,18 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
       debugLogDiagnostics: true,
       refreshListenable: appStateNotifier,
       errorBuilder: (context, state) =>
-          appStateNotifier.loggedIn ? const NavBarPage() : const LoginpageWidget(),
+          appStateNotifier.loggedIn ? NavBarPage() : LoginpageWidget(),
       routes: [
         FFRoute(
           name: '_initialize',
           path: '/',
           builder: (context, _) =>
-              appStateNotifier.loggedIn ? const NavBarPage() : const LoginpageWidget(),
+              appStateNotifier.loggedIn ? NavBarPage() : LoginpageWidget(),
         ),
         FFRoute(
           name: 'Loginpage',
           path: '/loginpage',
-          builder: (context, params) => const LoginpageWidget(),
+          builder: (context, params) => LoginpageWidget(),
         ),
         FFRoute(
           name: 'villasBookingDetails',
@@ -113,20 +123,20 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: 'Employee_home',
           path: '/employeeHome',
           builder: (context, params) => params.isEmpty
-              ? const NavBarPage(initialPage: 'Employee_home')
-              : const EmployeeHomeWidget(),
+              ? NavBarPage(initialPage: 'Employee_home')
+              : EmployeeHomeWidget(),
         ),
         FFRoute(
           name: 'bookmarked',
           path: '/bookmarked',
           builder: (context, params) => params.isEmpty
-              ? const NavBarPage(initialPage: 'bookmarked')
-              : const BookmarkedWidget(),
+              ? NavBarPage(initialPage: 'bookmarked')
+              : BookmarkedWidget(),
         ),
         FFRoute(
           name: 'bookingHistory',
           path: '/bookingHistory',
-          builder: (context, params) => const BookingHistoryWidget(),
+          builder: (context, params) => BookingHistoryWidget(),
         ),
         FFRoute(
           name: 'villasDetails',
@@ -141,7 +151,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: 'Earnings',
           path: '/earnings',
-          builder: (context, params) => const EarningsWidget(),
+          builder: (context, params) => EarningsWidget(),
         ),
         FFRoute(
           name: 'villasDetailsfromlist',
@@ -154,15 +164,33 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: 'currentBookings',
           path: '/currentBookings',
-          builder: (context, params) => const CurrentBookingsWidget(),
+          builder: (context, params) => CurrentBookingsWidget(),
         ),
         FFRoute(
           name: 'employee_Profile',
           path: '/employeeProfile',
           requireAuth: true,
           builder: (context, params) => params.isEmpty
-              ? const NavBarPage(initialPage: 'employee_Profile')
-              : const EmployeeProfileWidget(),
+              ? NavBarPage(initialPage: 'employee_Profile')
+              : EmployeeProfileWidget(
+                  hii: params.getParam('hii', ParamType.String),
+                ),
+        ),
+        FFRoute(
+          name: 'bookingCalender',
+          path: '/bookingCalender',
+          builder: (context, params) => BookingCalenderWidget(
+            villaref: params.getParam(
+                'villaref', ParamType.DocumentReference, false, ['villas']),
+          ),
+        ),
+        FFRoute(
+          name: 'bookingCalenderCopy',
+          path: '/bookingCalenderCopy',
+          builder: (context, params) => BookingCalenderCopyWidget(
+            villaref: params.getParam(
+                'villaref', ParamType.DocumentReference, false, ['villas']),
+          ),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );
@@ -349,7 +377,7 @@ class FFRoute {
                     fit: BoxFit.fitHeight,
                   ),
                 )
-              : page;
+              : PushNotificationsHandler(child: page);
 
           final transitionInfo = state.transitionInfo;
           return transitionInfo.hasTransition
@@ -391,7 +419,7 @@ class TransitionInfo {
   final Duration duration;
   final Alignment? alignment;
 
-  static TransitionInfo appDefault() => const TransitionInfo(hasTransition: false);
+  static TransitionInfo appDefault() => TransitionInfo(hasTransition: false);
 }
 
 class RootPageContext {

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import '/backend/backend.dart';
+import '/backend/schema/structs/index.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'flutter_flow/flutter_flow_util.dart';
 
 class FFAppState extends ChangeNotifier {
@@ -24,20 +26,20 @@ class FFAppState extends ChangeNotifier {
 
   DateTime? _EndDate = DateTime.fromMillisecondsSinceEpoch(1694673000000);
   DateTime? get EndDate => _EndDate;
-  set EndDate(DateTime? value) {
-    _EndDate = value;
+  set EndDate(DateTime? _value) {
+    _EndDate = _value;
   }
 
   DateTime? _startDate = DateTime.fromMillisecondsSinceEpoch(1693549800000);
   DateTime? get startDate => _startDate;
-  set startDate(DateTime? value) {
-    _startDate = value;
+  set startDate(DateTime? _value) {
+    _startDate = _value;
   }
 
   double _monthlyearning = 0.0;
   double get monthlyearning => _monthlyearning;
-  set monthlyearning(double value) {
-    _monthlyearning = value;
+  set monthlyearning(double _value) {
+    _monthlyearning = _value;
   }
 }
 

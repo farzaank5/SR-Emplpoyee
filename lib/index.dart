@@ -15,3 +15,7 @@ export '/current_bookings/current_bookings_widget.dart'
     show CurrentBookingsWidget;
 export '/employee_profile/employee_profile_widget.dart'
     show EmployeeProfileWidget;
+export '/booking_calender/booking_calender_widget.dart'
+    show BookingCalenderWidget;
+export '/booking_calender_copy/booking_calender_copy_widget.dart'
+    show BookingCalenderCopyWidget;

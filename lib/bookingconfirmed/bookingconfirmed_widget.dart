@@ -3,19 +3,21 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'bookingconfirmed_model.dart';
 export 'bookingconfirmed_model.dart';
 
 class BookingconfirmedWidget extends StatefulWidget {
   const BookingconfirmedWidget({
-    super.key,
+    Key? key,
     required this.placeRef,
     required this.startDate,
     required this.endDate,
-  });
+  }) : super(key: key);
 
   final DocumentReference? placeRef;
   final DateTime? startDate;
@@ -63,7 +65,7 @@ class _BookingconfirmedWidgetState extends State<BookingconfirmedWidget> {
         if (!snapshot.hasData) {
           return Scaffold(
             backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
-            body: const Center(
+            body: Center(
               child: SizedBox(
                 width: 50.0,
                 height: 50.0,
@@ -90,7 +92,7 @@ class _BookingconfirmedWidgetState extends State<BookingconfirmedWidget> {
                 backgroundColor:
                     FlutterFlowTheme.of(context).secondaryBackground,
                 automaticallyImplyLeading: false,
-                actions: const [],
+                actions: [],
                 centerTitle: false,
                 elevation: 0.0,
               ),
@@ -101,20 +103,20 @@ class _BookingconfirmedWidgetState extends State<BookingconfirmedWidget> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Align(
-                      alignment: const AlignmentDirectional(0.0, 0.0),
+                      alignment: AlignmentDirectional(0.0, 0.0),
                       child: Container(
                         width: 140.0,
                         height: 140.0,
                         decoration: BoxDecoration(
-                          color: const Color(0xFFCCCCCC),
+                          color: Color(0xFFCCCCCC),
                           shape: BoxShape.circle,
                           border: Border.all(
                             color: Colors.black,
                             width: 2.0,
                           ),
                         ),
-                        alignment: const AlignmentDirectional(0.0, 0.0),
-                        child: const Padding(
+                        alignment: AlignmentDirectional(0.0, 0.0),
+                        child: Padding(
                           padding: EdgeInsets.all(30.0),
                           child: Icon(
                             Icons.check_rounded,
@@ -126,7 +128,7 @@ class _BookingconfirmedWidgetState extends State<BookingconfirmedWidget> {
                     ),
                     Padding(
                       padding:
-                          const EdgeInsetsDirectional.fromSTEB(0.0, 24.0, 0.0, 0.0),
+                          EdgeInsetsDirectional.fromSTEB(0.0, 24.0, 0.0, 0.0),
                       child: Text(
                         'Booking Confirmed!',
                         style:
@@ -138,7 +140,7 @@ class _BookingconfirmedWidgetState extends State<BookingconfirmedWidget> {
                     ),
                     Padding(
                       padding:
-                          const EdgeInsetsDirectional.fromSTEB(0.0, 24.0, 0.0, 0.0),
+                          EdgeInsetsDirectional.fromSTEB(0.0, 24.0, 0.0, 0.0),
                       child: Text(
                         formatNumber(
                           functions.calculateBasePrice(
@@ -155,7 +157,7 @@ class _BookingconfirmedWidgetState extends State<BookingconfirmedWidget> {
                     ),
                     Padding(
                       padding:
-                          const EdgeInsetsDirectional.fromSTEB(24.0, 8.0, 24.0, 0.0),
+                          EdgeInsetsDirectional.fromSTEB(24.0, 8.0, 24.0, 0.0),
                       child: Text(
                         'Your Booking has been confirmed, it may take few seconds in order to show up in your bookings list.',
                         textAlign: TextAlign.center,
@@ -164,7 +166,7 @@ class _BookingconfirmedWidgetState extends State<BookingconfirmedWidget> {
                     ),
                     Padding(
                       padding:
-                          const EdgeInsetsDirectional.fromSTEB(0.0, 130.0, 0.0, 0.0),
+                          EdgeInsetsDirectional.fromSTEB(0.0, 130.0, 0.0, 0.0),
                       child: FFButtonWidget(
                         onPressed: () async {
                           context.pushNamed('Employee_home');
@@ -173,9 +175,9 @@ class _BookingconfirmedWidgetState extends State<BookingconfirmedWidget> {
                         options: FFButtonOptions(
                           width: 230.0,
                           height: 50.0,
-                          padding: const EdgeInsetsDirectional.fromSTEB(
+                          padding: EdgeInsetsDirectional.fromSTEB(
                               0.0, 0.0, 0.0, 0.0),
-                          iconPadding: const EdgeInsetsDirectional.fromSTEB(
+                          iconPadding: EdgeInsetsDirectional.fromSTEB(
                               0.0, 0.0, 0.0, 0.0),
                           color: FlutterFlowTheme.of(context).alternate,
                           textStyle: FlutterFlowTheme.of(context).bodyLarge,

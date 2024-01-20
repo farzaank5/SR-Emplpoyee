@@ -12,7 +12,20 @@
           "package_name": "com.mycompany.srgroupstays"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "585262537421-bh10r84p8n1itj707j7aaacmctcucqc7.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.mycompany.srgroupstays",
+            "certificate_hash": "9bbb3186b2189ef16d8f272bdab59362c395cbb4"
+          }
+        },
+        {
+          "client_id": "585262537421-50bdggk0ggiq82hbfolhu049u4aepanr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyDF57DBGe4rbueY9QUeg-prrP6AT8MrXCA"
@@ -20,7 +33,19 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "585262537421-50bdggk0ggiq82hbfolhu049u4aepanr.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "585262537421-b3qsah227ibmr8bregeo2f7fguv2ao0e.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.mycompany.srgroupstays"
+              }
+            }
+          ]
         }
       }
     },
@@ -31,7 +56,20 @@
           "package_name": "com.srgroupEmployee"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "585262537421-4iij3mr4auonofj3oggii9m8l2b7nii0.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.srgroupEmployee",
+            "certificate_hash": "9bbb3186b2189ef16d8f272bdab59362c395cbb4"
+          }
+        },
+        {
+          "client_id": "585262537421-50bdggk0ggiq82hbfolhu049u4aepanr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyDF57DBGe4rbueY9QUeg-prrP6AT8MrXCA"
@@ -39,7 +77,19 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "585262537421-50bdggk0ggiq82hbfolhu049u4aepanr.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "585262537421-b3qsah227ibmr8bregeo2f7fguv2ao0e.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.mycompany.srgroupstays"
+              }
+            }
+          ]
         }
       }
     }

@@ -1,5 +1,6 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
+import '/backend/push_notifications/push_notifications_util.dart';
 import '/flutter_flow/flutter_flow_choice_chips.dart';
 import '/flutter_flow/flutter_flow_count_controller.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
@@ -8,22 +9,25 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/form_field_controller.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'villas_booking_details_model.dart';
 export 'villas_booking_details_model.dart';
 
 class VillasBookingDetailsWidget extends StatefulWidget {
   const VillasBookingDetailsWidget({
-    super.key,
+    Key? key,
     required this.placeRef,
     required this.startDate,
     required this.endDate,
     this.totalGuests,
     this.bookingRef,
-  });
+  }) : super(key: key);
 
   final DocumentReference? placeRef;
   final DateTime? startDate;
@@ -87,7 +91,7 @@ class _VillasBookingDetailsWidgetState
         if (!snapshot.hasData) {
           return Scaffold(
             backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
-            body: const Center(
+            body: Center(
               child: SizedBox(
                 width: 50.0,
                 height: 50.0,
@@ -125,7 +129,7 @@ class _VillasBookingDetailsWidgetState
                   context.safePop();
                 },
               ),
-              actions: const [],
+              actions: [],
               centerTitle: false,
               elevation: 0.0,
             ),
@@ -137,18 +141,18 @@ class _VillasBookingDetailsWidgetState
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Align(
-                      alignment: const AlignmentDirectional(-1.0, 0.0),
+                      alignment: AlignmentDirectional(-1.0, 0.0),
                       child: Padding(
-                        padding: const EdgeInsetsDirectional.fromSTEB(
+                        padding: EdgeInsetsDirectional.fromSTEB(
                             18.0, 15.0, 18.0, 0.0),
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(8.0),
                           child: Image.network(
                             villasBookingDetailsVillasRecord.phoUrl,
                             width: 512.0,
-                            height: 251.0,
+                            height: 216.0,
                             fit: BoxFit.fill,
-                            alignment: const Alignment(0.0, 0.0),
+                            alignment: Alignment(0.0, 0.0),
                           ),
                         ),
                       ),
@@ -158,7 +162,7 @@ class _VillasBookingDetailsWidgetState
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Padding(
-                          padding: const EdgeInsetsDirectional.fromSTEB(
+                          padding: EdgeInsetsDirectional.fromSTEB(
                               16.0, 12.0, 0.0, 0.0),
                           child: Text(
                             villasBookingDetailsVillasRecord.displayName,
@@ -171,7 +175,7 @@ class _VillasBookingDetailsWidgetState
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsetsDirectional.fromSTEB(
+                          padding: EdgeInsetsDirectional.fromSTEB(
                               16.0, 8.0, 0.0, 0.0),
                           child: Text(
                             villasBookingDetailsVillasRecord.location,
@@ -182,7 +186,7 @@ class _VillasBookingDetailsWidgetState
                     ),
                     Padding(
                       padding:
-                          const EdgeInsetsDirectional.fromSTEB(24.0, 24.0, 24.0, 0.0),
+                          EdgeInsetsDirectional.fromSTEB(24.0, 24.0, 24.0, 0.0),
                       child: Row(
                         mainAxisSize: MainAxisSize.max,
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -214,7 +218,7 @@ class _VillasBookingDetailsWidgetState
                     ),
                     Padding(
                       padding:
-                          const EdgeInsetsDirectional.fromSTEB(24.0, 24.0, 24.0, 0.0),
+                          EdgeInsetsDirectional.fromSTEB(24.0, 24.0, 24.0, 0.0),
                       child: Row(
                         mainAxisSize: MainAxisSize.max,
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -232,7 +236,7 @@ class _VillasBookingDetailsWidgetState
                     ),
                     Padding(
                       padding:
-                          const EdgeInsetsDirectional.fromSTEB(24.0, 24.0, 24.0, 0.0),
+                          EdgeInsetsDirectional.fromSTEB(24.0, 24.0, 24.0, 0.0),
                       child: Row(
                         mainAxisSize: MainAxisSize.max,
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -249,9 +253,9 @@ class _VillasBookingDetailsWidgetState
                       ),
                     ),
                     Align(
-                      alignment: const AlignmentDirectional(0.0, 1.0),
+                      alignment: AlignmentDirectional(0.0, 1.0),
                       child: Padding(
-                        padding: const EdgeInsetsDirectional.fromSTEB(
+                        padding: EdgeInsetsDirectional.fromSTEB(
                             24.0, 12.0, 24.0, 0.0),
                         child: Row(
                           mainAxisSize: MainAxisSize.max,
@@ -284,7 +288,7 @@ class _VillasBookingDetailsWidgetState
                         ),
                       ),
                     ),
-                    const Opacity(
+                    Opacity(
                       opacity: 0.4,
                       child: Divider(
                         thickness: 1.0,
@@ -295,14 +299,15 @@ class _VillasBookingDetailsWidgetState
                       key: _model.formKey,
                       autovalidateMode: AutovalidateMode.disabled,
                       child: SingleChildScrollView(
+                        primary: false,
                         child: Column(
                           mainAxisSize: MainAxisSize.max,
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [
                             Align(
-                              alignment: const AlignmentDirectional(-1.0, 0.0),
+                              alignment: AlignmentDirectional(-1.0, 0.0),
                               child: Padding(
-                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                padding: EdgeInsetsDirectional.fromSTEB(
                                     24.0, 0.0, 0.0, 0.0),
                                 child: Text(
                                   'Fill the guest details',
@@ -316,7 +321,7 @@ class _VillasBookingDetailsWidgetState
                               ),
                             ),
                             Padding(
-                              padding: const EdgeInsetsDirectional.fromSTEB(
+                              padding: EdgeInsetsDirectional.fromSTEB(
                                   24.0, 10.0, 24.0, 0.0),
                               child: TextFormField(
                                 controller: _model.nameController,
@@ -376,12 +381,12 @@ class _VillasBookingDetailsWidgetState
                               mainAxisAlignment: MainAxisAlignment.spaceAround,
                               children: [
                                 Align(
-                                  alignment: const AlignmentDirectional(-1.0, 0.0),
+                                  alignment: AlignmentDirectional(-1.0, 0.0),
                                   child: Padding(
-                                    padding: const EdgeInsetsDirectional.fromSTEB(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
                                         24.0, 5.0, 0.0, 0.0),
                                     child: FlutterFlowChoiceChips(
-                                      options: const [
+                                      options: [
                                         ChipData('Male', Icons.male_outlined),
                                         ChipData('Female', Icons.female_sharp)
                                       ],
@@ -399,15 +404,15 @@ class _VillasBookingDetailsWidgetState
                                                   FlutterFlowTheme.of(context)
                                                       .primaryText,
                                             ),
-                                        iconColor: const Color(0xFF606060),
+                                        iconColor: Color(0xFF606060),
                                         iconSize: 18.0,
                                         elevation: 2.0,
-                                        borderColor: const Color(0xFF464646),
+                                        borderColor: Color(0xFF464646),
                                         borderRadius:
                                             BorderRadius.circular(16.0),
                                       ),
                                       unselectedChipStyle: ChipStyle(
-                                        backgroundColor: const Color(0xFFD0D0D0),
+                                        backgroundColor: Color(0xFFD0D0D0),
                                         textStyle: FlutterFlowTheme.of(context)
                                             .bodyMedium
                                             .override(
@@ -438,7 +443,7 @@ class _VillasBookingDetailsWidgetState
                                 ),
                                 Expanded(
                                   child: Padding(
-                                    padding: const EdgeInsetsDirectional.fromSTEB(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
                                         24.0, 10.0, 24.0, 0.0),
                                     child: TextFormField(
                                       controller: _model.ageController,
@@ -504,7 +509,7 @@ class _VillasBookingDetailsWidgetState
                               ],
                             ),
                             Padding(
-                              padding: const EdgeInsetsDirectional.fromSTEB(
+                              padding: EdgeInsetsDirectional.fromSTEB(
                                   24.0, 10.0, 24.0, 0.0),
                               child: TextFormField(
                                 controller: _model.contactController,
@@ -568,7 +573,7 @@ class _VillasBookingDetailsWidgetState
                               ),
                             ),
                             Padding(
-                              padding: const EdgeInsetsDirectional.fromSTEB(
+                              padding: EdgeInsetsDirectional.fromSTEB(
                                   24.0, 10.0, 24.0, 0.0),
                               child: TextFormField(
                                 controller: _model.verificationController,
@@ -619,7 +624,7 @@ class _VillasBookingDetailsWidgetState
                               ),
                             ),
                             Padding(
-                              padding: const EdgeInsetsDirectional.fromSTEB(
+                              padding: EdgeInsetsDirectional.fromSTEB(
                                   0.0, 10.0, 0.0, 0.0),
                               child: Row(
                                 mainAxisSize: MainAxisSize.max,
@@ -627,7 +632,7 @@ class _VillasBookingDetailsWidgetState
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   Padding(
-                                    padding: const EdgeInsetsDirectional.fromSTEB(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
                                         40.0, 0.0, 0.0, 0.0),
                                     child: Text(
                                       'Total Adult',
@@ -636,9 +641,9 @@ class _VillasBookingDetailsWidgetState
                                     ),
                                   ),
                                   Align(
-                                    alignment: const AlignmentDirectional(1.0, 0.0),
+                                    alignment: AlignmentDirectional(1.0, 0.0),
                                     child: Padding(
-                                      padding: const EdgeInsetsDirectional.fromSTEB(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
                                           24.0, 0.0, 24.0, 0.0),
                                       child: Container(
                                         width: 160.0,
@@ -718,7 +723,7 @@ class _VillasBookingDetailsWidgetState
                                                                 .primaryText,
                                                       ),
                                                     ),
-                                                    duration: const Duration(
+                                                    duration: Duration(
                                                         milliseconds: 2350),
                                                     backgroundColor:
                                                         FlutterFlowTheme.of(
@@ -738,7 +743,7 @@ class _VillasBookingDetailsWidgetState
                               ),
                             ),
                             Padding(
-                              padding: const EdgeInsetsDirectional.fromSTEB(
+                              padding: EdgeInsetsDirectional.fromSTEB(
                                   0.0, 10.0, 0.0, 0.0),
                               child: Row(
                                 mainAxisSize: MainAxisSize.max,
@@ -746,7 +751,7 @@ class _VillasBookingDetailsWidgetState
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   Padding(
-                                    padding: const EdgeInsetsDirectional.fromSTEB(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
                                         40.0, 0.0, 0.0, 0.0),
                                     child: Text(
                                       'Total Children',
@@ -755,9 +760,9 @@ class _VillasBookingDetailsWidgetState
                                     ),
                                   ),
                                   Align(
-                                    alignment: const AlignmentDirectional(1.0, 0.0),
+                                    alignment: AlignmentDirectional(1.0, 0.0),
                                     child: Padding(
-                                      padding: const EdgeInsetsDirectional.fromSTEB(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
                                           24.0, 0.0, 24.0, 0.0),
                                       child: Container(
                                         width: 160.0,
@@ -837,7 +842,7 @@ class _VillasBookingDetailsWidgetState
                                                                 .primaryText,
                                                       ),
                                                     ),
-                                                    duration: const Duration(
+                                                    duration: Duration(
                                                         milliseconds: 2849),
                                                     backgroundColor:
                                                         FlutterFlowTheme.of(
@@ -870,7 +875,7 @@ class _VillasBookingDetailsWidgetState
                           builder: (context, snapshot) {
                             // Customize what your widget looks like when it's loading.
                             if (!snapshot.hasData) {
-                              return const Center(
+                              return Center(
                                 child: SizedBox(
                                   width: 50.0,
                                   height: 50.0,
@@ -899,14 +904,14 @@ class _VillasBookingDetailsWidgetState
                               width: MediaQuery.sizeOf(context).width * 1.0,
                               decoration: BoxDecoration(
                                 color: FlutterFlowTheme.of(context).primary,
-                                boxShadow: const [
+                                boxShadow: [
                                   BoxShadow(
                                     blurRadius: 4.0,
                                     color: Color(0x55000000),
                                     offset: Offset(0.0, 2.0),
                                   )
                                 ],
-                                borderRadius: const BorderRadius.only(
+                                borderRadius: BorderRadius.only(
                                   bottomLeft: Radius.circular(0.0),
                                   bottomRight: Radius.circular(0.0),
                                   topLeft: Radius.circular(16.0),
@@ -983,37 +988,45 @@ class _VillasBookingDetailsWidgetState
                                     gender: _model.choiceChipsValue,
                                   ));
 
-                                  await TotalBookingRecord.collection
-                                      .doc()
+                                  var totalBookingRecordReference =
+                                      TotalBookingRecord.collection.doc();
+                                  await totalBookingRecordReference
                                       .set(createTotalBookingRecordData(
-                                        nameofVilla:
+                                    nameofVilla:
+                                        villasBookingDetailsVillasRecord
+                                            .displayName,
+                                    price: functions
+                                        .calculateBasePrice(
                                             villasBookingDetailsVillasRecord
-                                                .displayName,
-                                        price: functions
+                                                .price,
+                                            widget.startDate!,
+                                            widget.endDate!)
+                                        ?.toDouble(),
+                                    employeeCommision: functions.getEmployeeEarning(
+                                        functions
                                             .calculateBasePrice(
                                                 villasBookingDetailsVillasRecord
                                                     .price,
                                                 widget.startDate!,
-                                                widget.endDate!)
-                                            ?.toDouble(),
-                                        employeeCommision:
-                                            functions.getEmployeeEarning(
-                                                functions
-                                                    .calculateBasePrice(
-                                                        villasBookingDetailsVillasRecord
-                                                            .price,
-                                                        widget.startDate!,
-                                                        widget.endDate!)!
-                                                    .toDouble(),
+                                                widget.endDate!)!
+                                            .toDouble(),
+                                        villasBookingDetailsVillasRecord
+                                            .employeePer
+                                            .toDouble()),
+                                    startDate: widget.startDate,
+                                    endDate: widget.endDate,
+                                    employeeName: currentUserDisplayName,
+                                    emplastName: valueOrDefault(
+                                        currentUserDocument?.lastName, ''),
+                                    profit: functions.getProfit(
+                                        functions
+                                            .calculateBasePrice(
                                                 villasBookingDetailsVillasRecord
-                                                    .employeePer
-                                                    .toDouble()),
-                                        startDate: widget.startDate,
-                                        endDate: widget.endDate,
-                                        employeeName: currentUserDisplayName,
-                                        emplastName: valueOrDefault(
-                                            currentUserDocument?.lastName, ''),
-                                        profit: functions.getProfit(
+                                                    .price,
+                                                widget.startDate!,
+                                                widget.endDate!)!
+                                            .toDouble(),
+                                        functions.getEmployeeEarning(
                                             functions
                                                 .calculateBasePrice(
                                                     villasBookingDetailsVillasRecord
@@ -1021,7 +1034,58 @@ class _VillasBookingDetailsWidgetState
                                                     widget.startDate!,
                                                     widget.endDate!)!
                                                 .toDouble(),
-                                            functions.getEmployeeEarning(
+                                            villasBookingDetailsVillasRecord
+                                                .employeePer
+                                                .toDouble())),
+                                    placeRef: widget.placeRef,
+                                    leadGuest: _model.nameController.text,
+                                    contactinfo: int.tryParse(
+                                        _model.contactController.text),
+                                    verificationID: int.tryParse(
+                                        _model.verificationController.text),
+                                    location: villasBookingDetailsVillasRecord
+                                        .location,
+                                    maxAdult: _model.countControlleradultValue,
+                                    maxChildren:
+                                        _model.countControllerchildrenValue,
+                                    age:
+                                        int.tryParse(_model.ageController.text),
+                                    gender: _model.choiceChipsValue,
+                                    createdtime: getCurrentTimestamp,
+                                  ));
+                                  _model.status =
+                                      TotalBookingRecord.getDocumentFromData(
+                                          createTotalBookingRecordData(
+                                            nameofVilla:
+                                                villasBookingDetailsVillasRecord
+                                                    .displayName,
+                                            price: functions
+                                                .calculateBasePrice(
+                                                    villasBookingDetailsVillasRecord
+                                                        .price,
+                                                    widget.startDate!,
+                                                    widget.endDate!)
+                                                ?.toDouble(),
+                                            employeeCommision:
+                                                functions.getEmployeeEarning(
+                                                    functions
+                                                        .calculateBasePrice(
+                                                            villasBookingDetailsVillasRecord
+                                                                .price,
+                                                            widget.startDate!,
+                                                            widget.endDate!)!
+                                                        .toDouble(),
+                                                    villasBookingDetailsVillasRecord
+                                                        .employeePer
+                                                        .toDouble()),
+                                            startDate: widget.startDate,
+                                            endDate: widget.endDate,
+                                            employeeName:
+                                                currentUserDisplayName,
+                                            emplastName: valueOrDefault(
+                                                currentUserDocument?.lastName,
+                                                ''),
+                                            profit: functions.getProfit(
                                                 functions
                                                     .calculateBasePrice(
                                                         villasBookingDetailsVillasRecord
@@ -1029,27 +1093,37 @@ class _VillasBookingDetailsWidgetState
                                                         widget.startDate!,
                                                         widget.endDate!)!
                                                     .toDouble(),
+                                                functions.getEmployeeEarning(
+                                                    functions
+                                                        .calculateBasePrice(
+                                                            villasBookingDetailsVillasRecord
+                                                                .price,
+                                                            widget.startDate!,
+                                                            widget.endDate!)!
+                                                        .toDouble(),
+                                                    villasBookingDetailsVillasRecord
+                                                        .employeePer
+                                                        .toDouble())),
+                                            placeRef: widget.placeRef,
+                                            leadGuest:
+                                                _model.nameController.text,
+                                            contactinfo: int.tryParse(
+                                                _model.contactController.text),
+                                            verificationID: int.tryParse(_model
+                                                .verificationController.text),
+                                            location:
                                                 villasBookingDetailsVillasRecord
-                                                    .employeePer
-                                                    .toDouble())),
-                                        placeRef: widget.placeRef,
-                                        leadGuest: _model.nameController.text,
-                                        contactinfo: int.tryParse(
-                                            _model.contactController.text),
-                                        verificationID: int.tryParse(
-                                            _model.verificationController.text),
-                                        location:
-                                            villasBookingDetailsVillasRecord
-                                                .location,
-                                        maxAdult:
-                                            _model.countControlleradultValue,
-                                        maxChildren:
-                                            _model.countControllerchildrenValue,
-                                        age: int.tryParse(
-                                            _model.ageController.text),
-                                        gender: _model.choiceChipsValue,
-                                        createdtime: getCurrentTimestamp,
-                                      ));
+                                                    .location,
+                                            maxAdult: _model
+                                                .countControlleradultValue,
+                                            maxChildren: _model
+                                                .countControllerchildrenValue,
+                                            age: int.tryParse(
+                                                _model.ageController.text),
+                                            gender: _model.choiceChipsValue,
+                                            createdtime: getCurrentTimestamp,
+                                          ),
+                                          totalBookingRecordReference);
 
                                   await bottomButtonAreaAdminLogincodeRecord!
                                       .reference
@@ -1104,6 +1178,19 @@ class _VillasBookingDetailsWidgetState
                                       },
                                     ),
                                   });
+                                  _model.allusers =
+                                      await queryUsersRecordOnce();
+                                  triggerPushNotification(
+                                    notificationTitle: 'Villa got Booked!!',
+                                    notificationText:
+                                        '${villasBookingDetailsVillasRecord.displayName} got booked from ${dateTimeFormat('yMMMd', widget.startDate)} - ${dateTimeFormat('yMMMd', widget.endDate)} click here to make more bookings.',
+                                    notificationSound: 'default',
+                                    userRefs: _model.allusers!
+                                        .map((e) => e.reference)
+                                        .toList(),
+                                    initialPageName: 'Employee_home',
+                                    parameterData: {},
+                                  );
 
                                   context.pushNamed(
                                     'bookingconfirmed',
@@ -1122,14 +1209,16 @@ class _VillasBookingDetailsWidgetState
                                       ),
                                     }.withoutNulls,
                                   );
+
+                                  setState(() {});
                                 },
                                 text: 'Book Now',
                                 options: FFButtonOptions(
                                   width: 65.0,
                                   height: 60.0,
-                                  padding: const EdgeInsetsDirectional.fromSTEB(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
                                       0.0, 0.0, 0.0, 0.0),
-                                  iconPadding: const EdgeInsetsDirectional.fromSTEB(
+                                  iconPadding: EdgeInsetsDirectional.fromSTEB(
                                       0.0, 0.0, 0.0, 0.0),
                                   color: Colors.black,
                                   textStyle: FlutterFlowTheme.of(context)
@@ -1141,7 +1230,7 @@ class _VillasBookingDetailsWidgetState
                                         fontSize: 20.0,
                                       ),
                                   elevation: 0.0,
-                                  borderSide: const BorderSide(
+                                  borderSide: BorderSide(
                                     color: Colors.transparent,
                                     width: 1.0,
                                   ),

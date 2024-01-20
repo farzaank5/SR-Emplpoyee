@@ -10,6 +10,7 @@ import 'place.dart';
 import 'uploaded_file.dart';
 import '/backend/backend.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import '/backend/schema/structs/index.dart';
 import '/auth/firebase_auth/auth_util.dart';
 
 List<String> getUniqueVillas(List<String> list) {
@@ -143,4 +144,149 @@ List<DateTime> getBookedDates(
     bookedDates.add(i);
   }
   return bookedDates;
+}
+
+List<dynamic>? monthNameToCalander(
+  int? month,
+  List<DateTime>? disabledDay,
+  List<DateTime>? selecteddate,
+) {
+  //
+  final now = DateTime.now();
+  final currentMonth = now.month;
+  final currentYear = now.year;
+  final daysInMonth = DateTime(currentYear, month! + 1, 0).day;
+  final firstDayOfMonth = DateTime(currentYear, month, 1).weekday;
+  final List<dynamic> calendar = [];
+
+  for (var i = 1; i <= daysInMonth; i++) {
+    final day = DateTime(currentYear, month, i);
+    final isPastDay = day.isBefore(DateTime(now.year, now.month, now.day));
+    final currentDate = DateTime(currentYear, month, i);
+    final days = {
+      'day': i,
+      'date': currentDate,
+      'disabled': disabledDay?.any((disabledDate) =>
+              disabledDate.year == currentDate.year &&
+              disabledDate.month == currentDate.month &&
+              disabledDate.day == currentDate.day) ??
+          false,
+      'selecteddate': selecteddate?.any((selecteddate) =>
+              selecteddate.year == currentDate.year &&
+              selecteddate.month == currentDate.month &&
+              selecteddate.day == currentDate.day) ??
+          false,
+      'today': currentMonth == month && i == now.day,
+      'pastdays': isPastDay
+    };
+    calendar.add(days);
+  }
+
+  final List<dynamic> monthCalendar = [];
+
+  for (var i = 0; i < firstDayOfMonth - 1; i++) {
+    monthCalendar.add({'day': null});
+  }
+
+  monthCalendar.addAll(calendar);
+
+  final remainingDays = 42 - monthCalendar.length;
+
+  for (var i = 0; i < remainingDays; i++) {
+    monthCalendar.add({'day': null});
+  }
+
+  return monthCalendar;
+}
+
+List<DateTime>? inBetweenday(
+  List<DateTime>? startDate,
+  List<DateTime>? endDate,
+) {
+  // return the days and inbetween list  days
+  if (startDate == null || endDate == null) {
+    return null;
+  }
+
+  List<DateTime> days = [];
+
+  for (int i = 0; i < startDate.length; i++) {
+    DateTime start = startDate[i];
+    DateTime end = endDate[i];
+
+    if (start.isAfter(end)) {
+      continue;
+    }
+
+    while (start.isBefore(end) || start.isAtSameMomentAs(end)) {
+      days.add(start);
+      start = start.add(Duration(days: 1));
+    }
+  }
+
+  return days;
+}
+
+int? monthtointeger(DateTime? date) {
+  // datetime to month mm as integer eg. 20/4/2023 return as 4
+  if (date == null) {
+    return null;
+  }
+  return date.month;
+}
+
+DateTime? stringtoDate(String? date) {
+  // string date to datetime
+  if (date == null) {
+    return null;
+  }
+  try {
+    return DateTime.parse(date);
+  } catch (e) {
+    return null;
+  }
+}
+
+List<DateTime>? inbetweendaysss(
+  DateTime? start,
+  DateTime? end,
+) {
+  /// in betwwen days from 1 start and 1 end dates
+
+  // in between days from start to end
+  if (start == null || end == null) {
+    return null;
+  }
+
+  final List<DateTime> days = [];
+  DateTime current = start;
+  while (current.isBefore(end)) {
+    days.add(current);
+    current = current.add(const Duration(days: 1));
+  }
+  days.add(end);
+
+  return days;
+}
+
+dynamic yearmonth(
+  int? month,
+  DateTime? date,
+) {
+  // incriment or decriment month from date and return YYYY and MMMM eg : month 1 = january
+  if (month == null || date == null) {
+    return null;
+  }
+  final newDate = DateTime(date.year, month, date.day);
+  final monthh = DateFormat('MMMM');
+  final year = DateFormat('yyyy');
+  return {'month': monthh.format(newDate), 'year': year.format(newDate)};
+}
+
+List<String> getemplist(
+  String firstname,
+  String lastname,
+) {
+  // a function that shows the list of documents which contains the same user name
+  return []; // TODO: Implement function logic
 }

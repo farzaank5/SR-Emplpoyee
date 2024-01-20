@@ -3,16 +3,20 @@ import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/flutter_flow/flutter_flow_widgets.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'bookmarked_model.dart';
 export 'bookmarked_model.dart';
 
 class BookmarkedWidget extends StatefulWidget {
-  const BookmarkedWidget({super.key});
+  const BookmarkedWidget({Key? key}) : super(key: key);
 
   @override
   _BookmarkedWidgetState createState() => _BookmarkedWidgetState();
@@ -39,8 +43,8 @@ class _BookmarkedWidgetState extends State<BookmarkedWidget>
           curve: Curves.easeInOut,
           delay: 0.ms,
           duration: 600.ms,
-          begin: const Offset(0.0, 80.0),
-          end: const Offset(0.0, 0.0),
+          begin: Offset(0.0, 80.0),
+          end: Offset(0.0, 0.0),
         ),
       ],
     ),
@@ -89,7 +93,7 @@ class _BookmarkedWidgetState extends State<BookmarkedWidget>
         appBar: AppBar(
           backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
           automaticallyImplyLeading: false,
-          actions: const [],
+          actions: [],
           centerTitle: false,
           elevation: 0.0,
         ),
@@ -97,7 +101,7 @@ class _BookmarkedWidgetState extends State<BookmarkedWidget>
           top: true,
           child: Container(
             height: 1000.0,
-            decoration: const BoxDecoration(),
+            decoration: BoxDecoration(),
             child: SingleChildScrollView(
               child: Column(
                 mainAxisSize: MainAxisSize.max,
@@ -106,18 +110,18 @@ class _BookmarkedWidgetState extends State<BookmarkedWidget>
                   Container(
                     width: double.infinity,
                     height: 48.0,
-                    decoration: const BoxDecoration(
+                    decoration: BoxDecoration(
                       color: Colors.white,
                     ),
                     child: Container(
-                      decoration: const BoxDecoration(),
+                      decoration: BoxDecoration(),
                       child: Row(
                         mainAxisSize: MainAxisSize.max,
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
                           Padding(
-                            padding: const EdgeInsetsDirectional.fromSTEB(
+                            padding: EdgeInsetsDirectional.fromSTEB(
                                 16.0, 0.0, 0.0, 0.0),
                             child: Text(
                               'Bookmarks',
@@ -126,7 +130,7 @@ class _BookmarkedWidgetState extends State<BookmarkedWidget>
                             ),
                           ),
                           Padding(
-                            padding: const EdgeInsetsDirectional.fromSTEB(
+                            padding: EdgeInsetsDirectional.fromSTEB(
                                 10.0, 0.0, 16.0, 0.0),
                             child: FaIcon(
                               FontAwesomeIcons.solidBookmark,
@@ -139,23 +143,24 @@ class _BookmarkedWidgetState extends State<BookmarkedWidget>
                     ),
                   ),
                   SingleChildScrollView(
+                    primary: false,
                     child: Column(
                       mainAxisSize: MainAxisSize.max,
                       children: [
                         Container(
                           height: 1000.0,
-                          decoration: const BoxDecoration(),
+                          decoration: BoxDecoration(),
                           child: Visibility(
                             visible: !_model.searchBool,
                             child: Padding(
-                              padding: const EdgeInsetsDirectional.fromSTEB(
+                              padding: EdgeInsetsDirectional.fromSTEB(
                                   0.0, 20.0, 0.0, 0.0),
                               child: AuthUserStreamWidget(
                                 builder: (context) => Builder(
                                   builder: (context) {
                                     final favoriteRef = (currentUserDocument
                                                 ?.bookmarks
-                                                .toList() ??
+                                                ?.toList() ??
                                             [])
                                         .toList();
                                     return ListView.builder(
@@ -168,7 +173,7 @@ class _BookmarkedWidgetState extends State<BookmarkedWidget>
                                             favoriteRef[favoriteRefIndex];
                                         return Padding(
                                           padding:
-                                              const EdgeInsetsDirectional.fromSTEB(
+                                              EdgeInsetsDirectional.fromSTEB(
                                                   16.0, 0.0, 16.0, 8.0),
                                           child: InkWell(
                                             splashColor: Colors.transparent,
@@ -201,7 +206,7 @@ class _BookmarkedWidgetState extends State<BookmarkedWidget>
                                                 color:
                                                     FlutterFlowTheme.of(context)
                                                         .secondaryBackground,
-                                                boxShadow: const [
+                                                boxShadow: [
                                                   BoxShadow(
                                                     blurRadius: 4.0,
                                                     color: Color(0x520E151B),
@@ -219,7 +224,7 @@ class _BookmarkedWidgetState extends State<BookmarkedWidget>
                                                 builder: (context, snapshot) {
                                                   // Customize what your widget looks like when it's loading.
                                                   if (!snapshot.hasData) {
-                                                    return const Center(
+                                                    return Center(
                                                       child: SizedBox(
                                                         width: 50.0,
                                                         height: 50.0,
@@ -242,7 +247,7 @@ class _BookmarkedWidgetState extends State<BookmarkedWidget>
                                                     children: [
                                                       Padding(
                                                         padding:
-                                                            const EdgeInsets.all(8.0),
+                                                            EdgeInsets.all(8.0),
                                                         child: Row(
                                                           mainAxisSize:
                                                               MainAxisSize.max,
@@ -271,15 +276,15 @@ class _BookmarkedWidgetState extends State<BookmarkedWidget>
                                                       Expanded(
                                                         child: Align(
                                                           alignment:
-                                                              const AlignmentDirectional(
+                                                              AlignmentDirectional(
                                                                   -1.0, 0.0),
                                                           child: Container(
                                                             width: 300.0,
                                                             decoration:
-                                                                const BoxDecoration(),
+                                                                BoxDecoration(),
                                                             child: Padding(
                                                               padding:
-                                                                  const EdgeInsetsDirectional
+                                                                  EdgeInsetsDirectional
                                                                       .fromSTEB(
                                                                           0.0,
                                                                           10.0,
@@ -298,7 +303,7 @@ class _BookmarkedWidgetState extends State<BookmarkedWidget>
                                                                 children: [
                                                                   Align(
                                                                     alignment:
-                                                                        const AlignmentDirectional(
+                                                                        AlignmentDirectional(
                                                                             -1.0,
                                                                             0.0),
                                                                     child: Text(
@@ -320,12 +325,12 @@ class _BookmarkedWidgetState extends State<BookmarkedWidget>
                                                                   Flexible(
                                                                     child:
                                                                         Align(
-                                                                      alignment: const AlignmentDirectional(
+                                                                      alignment: AlignmentDirectional(
                                                                           -1.0,
                                                                           -1.0),
                                                                       child:
                                                                           Padding(
-                                                                        padding: const EdgeInsetsDirectional.fromSTEB(
+                                                                        padding: EdgeInsetsDirectional.fromSTEB(
                                                                             0.0,
                                                                             10.0,
                                                                             0.0,
@@ -356,11 +361,11 @@ class _BookmarkedWidgetState extends State<BookmarkedWidget>
                                                       Flexible(
                                                         child: Align(
                                                           alignment:
-                                                              const AlignmentDirectional(
+                                                              AlignmentDirectional(
                                                                   1.0, 0.0),
                                                           child: Padding(
                                                             padding:
-                                                                const EdgeInsetsDirectional
+                                                                EdgeInsetsDirectional
                                                                     .fromSTEB(
                                                                         0.0,
                                                                         0.0,
@@ -405,7 +410,7 @@ class _BookmarkedWidgetState extends State<BookmarkedWidget>
                                                                             .primaryBackground,
                                                                       ),
                                                                     ),
-                                                                    duration: const Duration(
+                                                                    duration: Duration(
                                                                         milliseconds:
                                                                             4000),
                                                                     backgroundColor:

@@ -2,17 +2,20 @@ import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/flutter_flow/flutter_flow_widgets.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'villas_detailsfromlist_model.dart';
 export 'villas_detailsfromlist_model.dart';
 
 class VillasDetailsfromlistWidget extends StatefulWidget {
   const VillasDetailsfromlistWidget({
-    super.key,
+    Key? key,
     required this.placeRef,
-  });
+  }) : super(key: key);
 
   final DocumentReference? placeRef;
 
@@ -62,7 +65,7 @@ class _VillasDetailsfromlistWidgetState
         if (!snapshot.hasData) {
           return Scaffold(
             backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
-            body: const Center(
+            body: Center(
               child: SizedBox(
                 width: 50.0,
                 height: 50.0,
@@ -105,7 +108,7 @@ class _VillasDetailsfromlistWidgetState
                 context.pop();
               },
             ),
-            actions: const [],
+            actions: [],
             centerTitle: false,
             elevation: 0.0,
           ),
@@ -122,7 +125,7 @@ class _VillasDetailsfromlistWidgetState
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Padding(
-                          padding: const EdgeInsetsDirectional.fromSTEB(
+                          padding: EdgeInsetsDirectional.fromSTEB(
                               16.0, 12.0, 0.0, 0.0),
                           child: Text(
                             villasDetailsfromlistTotalBookingRecord!
@@ -136,7 +139,7 @@ class _VillasDetailsfromlistWidgetState
                           color: FlutterFlowTheme.of(context).alternate,
                         ),
                         Padding(
-                          padding: const EdgeInsetsDirectional.fromSTEB(
+                          padding: EdgeInsetsDirectional.fromSTEB(
                               24.0, 24.0, 24.0, 0.0),
                           child: Row(
                             mainAxisSize: MainAxisSize.max,
@@ -147,14 +150,14 @@ class _VillasDetailsfromlistWidgetState
                                 style: FlutterFlowTheme.of(context).labelMedium,
                               ),
                               Text(
-                                '${villasDetailsfromlistTotalBookingRecord.employeeName}${villasDetailsfromlistTotalBookingRecord.emplastName}',
+                                '${villasDetailsfromlistTotalBookingRecord?.employeeName}${villasDetailsfromlistTotalBookingRecord?.emplastName}',
                                 style: FlutterFlowTheme.of(context).bodyLarge,
                               ),
                             ],
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsetsDirectional.fromSTEB(
+                          padding: EdgeInsetsDirectional.fromSTEB(
                               24.0, 24.0, 24.0, 0.0),
                           child: Row(
                             mainAxisSize: MainAxisSize.max,
@@ -166,7 +169,8 @@ class _VillasDetailsfromlistWidgetState
                               ),
                               Text(
                                 formatNumber(
-                                  villasDetailsfromlistTotalBookingRecord.employeeCommision,
+                                  villasDetailsfromlistTotalBookingRecord!
+                                      .employeeCommision,
                                   formatType: FormatType.decimal,
                                   decimalType: DecimalType.periodDecimal,
                                   currency: 'Rs.',
@@ -177,7 +181,7 @@ class _VillasDetailsfromlistWidgetState
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsetsDirectional.fromSTEB(
+                          padding: EdgeInsetsDirectional.fromSTEB(
                               24.0, 24.0, 24.0, 0.0),
                           child: Row(
                             mainAxisSize: MainAxisSize.max,
@@ -190,14 +194,15 @@ class _VillasDetailsfromlistWidgetState
                               Text(
                                 dateTimeFormat(
                                     'yMMMd',
-                                    villasDetailsfromlistTotalBookingRecord.startDate!),
+                                    villasDetailsfromlistTotalBookingRecord!
+                                        .startDate!),
                                 style: FlutterFlowTheme.of(context).bodyLarge,
                               ),
                             ],
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsetsDirectional.fromSTEB(
+                          padding: EdgeInsetsDirectional.fromSTEB(
                               24.0, 24.0, 24.0, 0.0),
                           child: Row(
                             mainAxisSize: MainAxisSize.max,
@@ -210,14 +215,15 @@ class _VillasDetailsfromlistWidgetState
                               Text(
                                 dateTimeFormat(
                                     'yMMMd',
-                                    villasDetailsfromlistTotalBookingRecord.endDate!),
+                                    villasDetailsfromlistTotalBookingRecord!
+                                        .endDate!),
                                 style: FlutterFlowTheme.of(context).bodyLarge,
                               ),
                             ],
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsetsDirectional.fromSTEB(
+                          padding: EdgeInsetsDirectional.fromSTEB(
                               24.0, 12.0, 24.0, 0.0),
                           child: Row(
                             mainAxisSize: MainAxisSize.max,
@@ -234,7 +240,8 @@ class _VillasDetailsfromlistWidgetState
                               ),
                               Text(
                                 formatNumber(
-                                  villasDetailsfromlistTotalBookingRecord.price,
+                                  villasDetailsfromlistTotalBookingRecord!
+                                      .price,
                                   formatType: FormatType.decimal,
                                   decimalType: DecimalType.periodDecimal,
                                   currency: 'Rs.',
@@ -258,14 +265,14 @@ class _VillasDetailsfromlistWidgetState
                   width: MediaQuery.sizeOf(context).width * 1.0,
                   decoration: BoxDecoration(
                     color: FlutterFlowTheme.of(context).primary,
-                    boxShadow: const [
+                    boxShadow: [
                       BoxShadow(
                         blurRadius: 4.0,
                         color: Color(0x55000000),
                         offset: Offset(0.0, 2.0),
                       )
                     ],
-                    borderRadius: const BorderRadius.only(
+                    borderRadius: BorderRadius.only(
                       bottomLeft: Radius.circular(0.0),
                       bottomRight: Radius.circular(0.0),
                       topLeft: Radius.circular(16.0),

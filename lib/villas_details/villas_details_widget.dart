@@ -1,19 +1,25 @@
+import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
+import '/backend/push_notifications/push_notifications_util.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/flutter_flow/flutter_flow_widgets.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'villas_details_model.dart';
 export 'villas_details_model.dart';
 
 class VillasDetailsWidget extends StatefulWidget {
   const VillasDetailsWidget({
-    super.key,
+    Key? key,
     required this.placeRef,
     required this.bookingRef,
-  });
+  }) : super(key: key);
 
   final DocumentReference? placeRef;
   final DocumentReference? bookingRef;
@@ -60,7 +66,7 @@ class _VillasDetailsWidgetState extends State<VillasDetailsWidget> {
         if (!snapshot.hasData) {
           return Scaffold(
             backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
-            body: const Center(
+            body: Center(
               child: SizedBox(
                 width: 50.0,
                 height: 50.0,
@@ -94,7 +100,7 @@ class _VillasDetailsWidgetState extends State<VillasDetailsWidget> {
                 context.pop();
               },
             ),
-            actions: const [],
+            actions: [],
             centerTitle: false,
             elevation: 0.0,
           ),
@@ -104,7 +110,7 @@ class _VillasDetailsWidgetState extends State<VillasDetailsWidget> {
               mainAxisSize: MainAxisSize.max,
               children: [
                 Align(
-                  alignment: const AlignmentDirectional(0.0, 1.0),
+                  alignment: AlignmentDirectional(0.0, 1.0),
                   child: SingleChildScrollView(
                     child: Column(
                       mainAxisSize: MainAxisSize.max,
@@ -112,7 +118,7 @@ class _VillasDetailsWidgetState extends State<VillasDetailsWidget> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Padding(
-                          padding: const EdgeInsetsDirectional.fromSTEB(
+                          padding: EdgeInsetsDirectional.fromSTEB(
                               16.0, 0.0, 0.0, 0.0),
                           child: Text(
                             'Booking Details',
@@ -120,7 +126,7 @@ class _VillasDetailsWidgetState extends State<VillasDetailsWidget> {
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsetsDirectional.fromSTEB(
+                          padding: EdgeInsetsDirectional.fromSTEB(
                               16.0, 12.0, 0.0, 0.0),
                           child: Text(
                             villasDetailsBookingsRecord.name,
@@ -128,7 +134,7 @@ class _VillasDetailsWidgetState extends State<VillasDetailsWidget> {
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsetsDirectional.fromSTEB(
+                          padding: EdgeInsetsDirectional.fromSTEB(
                               16.0, 8.0, 0.0, 0.0),
                           child: Text(
                             villasDetailsBookingsRecord.location,
@@ -141,7 +147,7 @@ class _VillasDetailsWidgetState extends State<VillasDetailsWidget> {
                           color: FlutterFlowTheme.of(context).alternate,
                         ),
                         Padding(
-                          padding: const EdgeInsetsDirectional.fromSTEB(
+                          padding: EdgeInsetsDirectional.fromSTEB(
                               24.0, 24.0, 24.0, 0.0),
                           child: Row(
                             mainAxisSize: MainAxisSize.max,
@@ -164,7 +170,7 @@ class _VillasDetailsWidgetState extends State<VillasDetailsWidget> {
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsetsDirectional.fromSTEB(
+                          padding: EdgeInsetsDirectional.fromSTEB(
                               24.0, 24.0, 24.0, 0.0),
                           child: Row(
                             mainAxisSize: MainAxisSize.max,
@@ -183,7 +189,7 @@ class _VillasDetailsWidgetState extends State<VillasDetailsWidget> {
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsetsDirectional.fromSTEB(
+                          padding: EdgeInsetsDirectional.fromSTEB(
                               24.0, 24.0, 24.0, 0.0),
                           child: Row(
                             mainAxisSize: MainAxisSize.max,
@@ -202,7 +208,7 @@ class _VillasDetailsWidgetState extends State<VillasDetailsWidget> {
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsetsDirectional.fromSTEB(
+                          padding: EdgeInsetsDirectional.fromSTEB(
                               24.0, 24.0, 24.0, 0.0),
                           child: Row(
                             mainAxisSize: MainAxisSize.max,
@@ -221,7 +227,7 @@ class _VillasDetailsWidgetState extends State<VillasDetailsWidget> {
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsetsDirectional.fromSTEB(
+                          padding: EdgeInsetsDirectional.fromSTEB(
                               24.0, 12.0, 24.0, 0.0),
                           child: Row(
                             mainAxisSize: MainAxisSize.max,
@@ -257,6 +263,68 @@ class _VillasDetailsWidgetState extends State<VillasDetailsWidget> {
                   height: 36.0,
                   thickness: 1.0,
                   color: FlutterFlowTheme.of(context).primary,
+                ),
+                Align(
+                  alignment: AlignmentDirectional(0.0, 1.0),
+                  child: Padding(
+                    padding:
+                        EdgeInsetsDirectional.fromSTEB(0.0, 100.0, 0.0, 0.0),
+                    child: FFButtonWidget(
+                      onPressed: () async {
+                        await widget.bookingRef!.delete();
+                        context.safePop();
+                        ScaffoldMessenger.of(context).clearSnackBars();
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text(
+                              'Succesfully cancelled',
+                              style: TextStyle(
+                                color: FlutterFlowTheme.of(context)
+                                    .primaryBackground,
+                              ),
+                            ),
+                            duration: Duration(milliseconds: 4000),
+                            backgroundColor:
+                                FlutterFlowTheme.of(context).secondary,
+                          ),
+                        );
+                        _model.allemp = await queryUsersRecordOnce();
+                        triggerPushNotification(
+                          notificationTitle: 'Villas Booking Cancelled...',
+                          notificationText:
+                              '${villasDetailsBookingsRecord.name}got cancelled which was booked from${dateTimeFormat('yMMMd', villasDetailsBookingsRecord.startDate)} - ${dateTimeFormat('yMMMd', villasDetailsBookingsRecord.endDate)} click here to book more villas.',
+                          notificationSound: 'default',
+                          userRefs:
+                              _model.allemp!.map((e) => e.reference).toList(),
+                          initialPageName: 'Employee_home',
+                          parameterData: {},
+                        );
+
+                        setState(() {});
+                      },
+                      text: 'Cancel Booking',
+                      options: FFButtonOptions(
+                        width: 350.0,
+                        height: 40.0,
+                        padding: EdgeInsetsDirectional.fromSTEB(
+                            24.0, 0.0, 24.0, 0.0),
+                        iconPadding:
+                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                        color: Color(0xFFFF0000),
+                        textStyle:
+                            FlutterFlowTheme.of(context).titleSmall.override(
+                                  fontFamily: 'Plus Jakarta Sans',
+                                  color: Colors.white,
+                                ),
+                        elevation: 3.0,
+                        borderSide: BorderSide(
+                          color: Colors.transparent,
+                          width: 1.0,
+                        ),
+                        borderRadius: BorderRadius.circular(8.0),
+                      ),
+                    ),
+                  ),
                 ),
               ],
             ),

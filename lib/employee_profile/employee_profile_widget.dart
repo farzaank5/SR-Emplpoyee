@@ -6,15 +6,24 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'employee_profile_model.dart';
 export 'employee_profile_model.dart';
 
 class EmployeeProfileWidget extends StatefulWidget {
-  const EmployeeProfileWidget({super.key});
+  const EmployeeProfileWidget({
+    Key? key,
+    String? hii,
+  })  : this.hii = hii ?? '1',
+        super(key: key);
+
+  final String hii;
 
   @override
   _EmployeeProfileWidgetState createState() => _EmployeeProfileWidgetState();
@@ -41,8 +50,8 @@ class _EmployeeProfileWidgetState extends State<EmployeeProfileWidget>
           curve: Curves.easeInOut,
           delay: 0.ms,
           duration: 600.ms,
-          begin: const Offset(0.0, 90.0),
-          end: const Offset(0.0, 0.0),
+          begin: Offset(0.0, 90.0),
+          end: Offset(0.0, 0.0),
         ),
       ],
     ),
@@ -60,8 +69,8 @@ class _EmployeeProfileWidgetState extends State<EmployeeProfileWidget>
           curve: Curves.easeInOut,
           delay: 0.ms,
           duration: 600.ms,
-          begin: const Offset(0.0, 90.0),
-          end: const Offset(0.0, 0.0),
+          begin: Offset(0.0, 90.0),
+          end: Offset(0.0, 0.0),
         ),
       ],
     ),
@@ -79,8 +88,8 @@ class _EmployeeProfileWidgetState extends State<EmployeeProfileWidget>
           curve: Curves.easeInOut,
           delay: 0.ms,
           duration: 600.ms,
-          begin: const Offset(0.0, 90.0),
-          end: const Offset(0.0, 0.0),
+          begin: Offset(0.0, 90.0),
+          end: Offset(0.0, 0.0),
         ),
       ],
     ),
@@ -129,7 +138,7 @@ class _EmployeeProfileWidgetState extends State<EmployeeProfileWidget>
           'My Profile',
           style: FlutterFlowTheme.of(context).headlineMedium,
         ),
-        actions: const [],
+        actions: [],
         centerTitle: false,
         elevation: 0.0,
       ),
@@ -141,7 +150,7 @@ class _EmployeeProfileWidgetState extends State<EmployeeProfileWidget>
           children: [
             Expanded(
               child: Align(
-                alignment: const AlignmentDirectional(0.0, -1.0),
+                alignment: AlignmentDirectional(0.0, -1.0),
                 child: SingleChildScrollView(
                   primary: false,
                   child: Column(
@@ -150,9 +159,9 @@ class _EmployeeProfileWidgetState extends State<EmployeeProfileWidget>
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
                       Align(
-                        alignment: const AlignmentDirectional(0.0, -1.0),
+                        alignment: AlignmentDirectional(0.0, -1.0),
                         child: Padding(
-                          padding: const EdgeInsetsDirectional.fromSTEB(
+                          padding: EdgeInsetsDirectional.fromSTEB(
                               16.0, 16.0, 16.0, 0.0),
                           child: SingleChildScrollView(
                             child: Column(
@@ -162,7 +171,7 @@ class _EmployeeProfileWidgetState extends State<EmployeeProfileWidget>
                               children: [
                                 Container(
                                   width: double.infinity,
-                                  constraints: const BoxConstraints(
+                                  constraints: BoxConstraints(
                                     maxWidth: 390.0,
                                   ),
                                   decoration: BoxDecoration(
@@ -195,7 +204,7 @@ class _EmployeeProfileWidgetState extends State<EmployeeProfileWidget>
                                         ),
                                         child: Padding(
                                           padding:
-                                              const EdgeInsetsDirectional.fromSTEB(
+                                              EdgeInsetsDirectional.fromSTEB(
                                                   16.0, 12.0, 0.0, 12.0),
                                           child: Text(
                                             'My Account Information',
@@ -205,7 +214,7 @@ class _EmployeeProfileWidgetState extends State<EmployeeProfileWidget>
                                         ),
                                       ),
                                       Padding(
-                                        padding: const EdgeInsets.all(16.0),
+                                        padding: EdgeInsets.all(16.0),
                                         child: Row(
                                           mainAxisSize: MainAxisSize.max,
                                           children: [
@@ -213,7 +222,7 @@ class _EmployeeProfileWidgetState extends State<EmployeeProfileWidget>
                                               width: 72.0,
                                               height: 72.0,
                                               decoration: BoxDecoration(
-                                                color: const Color(0xFF767676),
+                                                color: Color(0xFF767676),
                                                 borderRadius:
                                                     BorderRadius.circular(10.0),
                                                 border: Border.all(
@@ -222,7 +231,7 @@ class _EmployeeProfileWidgetState extends State<EmployeeProfileWidget>
                                                 ),
                                               ),
                                               child: Padding(
-                                                padding: const EdgeInsets.all(2.0),
+                                                padding: EdgeInsets.all(2.0),
                                                 child: AuthUserStreamWidget(
                                                   builder: (context) =>
                                                       ClipRRect(
@@ -230,9 +239,9 @@ class _EmployeeProfileWidgetState extends State<EmployeeProfileWidget>
                                                         BorderRadius.circular(
                                                             8.0),
                                                     child: CachedNetworkImage(
-                                                      fadeInDuration: const Duration(
+                                                      fadeInDuration: Duration(
                                                           milliseconds: 500),
-                                                      fadeOutDuration: const Duration(
+                                                      fadeOutDuration: Duration(
                                                           milliseconds: 500),
                                                       imageUrl:
                                                           currentUserPhoto,
@@ -246,7 +255,7 @@ class _EmployeeProfileWidgetState extends State<EmployeeProfileWidget>
                                             ),
                                             Expanded(
                                               child: Padding(
-                                                padding: const EdgeInsetsDirectional
+                                                padding: EdgeInsetsDirectional
                                                     .fromSTEB(
                                                         16.0, 4.0, 0.0, 4.0),
                                                 child: Column(
@@ -258,7 +267,7 @@ class _EmployeeProfileWidgetState extends State<EmployeeProfileWidget>
                                                     AuthUserStreamWidget(
                                                       builder: (context) =>
                                                           Text(
-                                                        '$currentUserDisplayName ${valueOrDefault(currentUserDocument?.lastName, '')}',
+                                                        '${currentUserDisplayName} ${valueOrDefault(currentUserDocument?.lastName, '')}',
                                                         style: FlutterFlowTheme
                                                                 .of(context)
                                                             .headlineSmall
@@ -274,7 +283,7 @@ class _EmployeeProfileWidgetState extends State<EmployeeProfileWidget>
                                                     ),
                                                     Padding(
                                                       padding:
-                                                          const EdgeInsetsDirectional
+                                                          EdgeInsetsDirectional
                                                               .fromSTEB(
                                                                   0.0,
                                                                   4.0,
@@ -302,7 +311,7 @@ class _EmployeeProfileWidgetState extends State<EmployeeProfileWidget>
                                         children: [
                                           Expanded(
                                             child: Padding(
-                                              padding: const EdgeInsetsDirectional
+                                              padding: EdgeInsetsDirectional
                                                   .fromSTEB(
                                                       0.0, 0.0, 0.0, 12.0),
                                               child: FutureBuilder<int>(
@@ -313,7 +322,7 @@ class _EmployeeProfileWidgetState extends State<EmployeeProfileWidget>
                                                 builder: (context, snapshot) {
                                                   // Customize what your widget looks like when it's loading.
                                                   if (!snapshot.hasData) {
-                                                    return const Center(
+                                                    return Center(
                                                       child: SizedBox(
                                                         width: 50.0,
                                                         height: 50.0,
@@ -342,7 +351,7 @@ class _EmployeeProfileWidgetState extends State<EmployeeProfileWidget>
                                                     ),
                                                     child: Padding(
                                                       padding:
-                                                          const EdgeInsetsDirectional
+                                                          EdgeInsetsDirectional
                                                               .fromSTEB(
                                                                   0.0,
                                                                   12.0,
@@ -355,7 +364,7 @@ class _EmployeeProfileWidgetState extends State<EmployeeProfileWidget>
                                                             MainAxisAlignment
                                                                 .center,
                                                         children: [
-                                                          const Icon(
+                                                          Icon(
                                                             Icons
                                                                 .receipt_rounded,
                                                             color: Colors.black,
@@ -363,7 +372,7 @@ class _EmployeeProfileWidgetState extends State<EmployeeProfileWidget>
                                                           ),
                                                           Padding(
                                                             padding:
-                                                                const EdgeInsetsDirectional
+                                                                EdgeInsetsDirectional
                                                                     .fromSTEB(
                                                                         0.0,
                                                                         8.0,
@@ -406,7 +415,7 @@ class _EmployeeProfileWidgetState extends State<EmployeeProfileWidget>
                                           ),
                                           Expanded(
                                             child: Padding(
-                                              padding: const EdgeInsetsDirectional
+                                              padding: EdgeInsetsDirectional
                                                   .fromSTEB(
                                                       0.0, 0.0, 0.0, 12.0),
                                               child: FutureBuilder<int>(
@@ -424,7 +433,7 @@ class _EmployeeProfileWidgetState extends State<EmployeeProfileWidget>
                                                 builder: (context, snapshot) {
                                                   // Customize what your widget looks like when it's loading.
                                                   if (!snapshot.hasData) {
-                                                    return const Center(
+                                                    return Center(
                                                       child: SizedBox(
                                                         width: 50.0,
                                                         height: 50.0,
@@ -453,7 +462,7 @@ class _EmployeeProfileWidgetState extends State<EmployeeProfileWidget>
                                                     ),
                                                     child: Padding(
                                                       padding:
-                                                          const EdgeInsetsDirectional
+                                                          EdgeInsetsDirectional
                                                               .fromSTEB(
                                                                   0.0,
                                                                   12.0,
@@ -476,7 +485,7 @@ class _EmployeeProfileWidgetState extends State<EmployeeProfileWidget>
                                                           ),
                                                           Padding(
                                                             padding:
-                                                                const EdgeInsetsDirectional
+                                                                EdgeInsetsDirectional
                                                                     .fromSTEB(
                                                                         0.0,
                                                                         8.0,
@@ -519,7 +528,7 @@ class _EmployeeProfileWidgetState extends State<EmployeeProfileWidget>
                                           ),
                                           Expanded(
                                             child: Padding(
-                                              padding: const EdgeInsetsDirectional
+                                              padding: EdgeInsetsDirectional
                                                   .fromSTEB(
                                                       0.0, 0.0, 0.0, 12.0),
                                               child: Container(
@@ -533,7 +542,7 @@ class _EmployeeProfileWidgetState extends State<EmployeeProfileWidget>
                                                           8.0),
                                                 ),
                                                 child: Padding(
-                                                  padding: const EdgeInsetsDirectional
+                                                  padding: EdgeInsetsDirectional
                                                       .fromSTEB(
                                                           0.0, 12.0, 1.0, 0.0),
                                                   child: Column(
@@ -543,7 +552,7 @@ class _EmployeeProfileWidgetState extends State<EmployeeProfileWidget>
                                                         MainAxisAlignment
                                                             .spaceEvenly,
                                                     children: [
-                                                      const Icon(
+                                                      Icon(
                                                         Icons
                                                             .ssid_chart_rounded,
                                                         color: Colors.black,
@@ -551,7 +560,7 @@ class _EmployeeProfileWidgetState extends State<EmployeeProfileWidget>
                                                       ),
                                                       Padding(
                                                         padding:
-                                                            const EdgeInsetsDirectional
+                                                            EdgeInsetsDirectional
                                                                 .fromSTEB(
                                                                     0.0,
                                                                     8.0,
@@ -608,12 +617,12 @@ class _EmployeeProfileWidgetState extends State<EmployeeProfileWidget>
                                 ),
                                 Container(
                                   width: double.infinity,
-                                  constraints: const BoxConstraints(
+                                  constraints: BoxConstraints(
                                     maxWidth: 470.0,
                                   ),
-                                  decoration: const BoxDecoration(),
+                                  decoration: BoxDecoration(),
                                   child: Align(
-                                    alignment: const AlignmentDirectional(0.0, 1.0),
+                                    alignment: AlignmentDirectional(0.0, 1.0),
                                     child: Column(
                                       mainAxisSize: MainAxisSize.max,
                                       mainAxisAlignment: MainAxisAlignment.end,
@@ -622,7 +631,7 @@ class _EmployeeProfileWidgetState extends State<EmployeeProfileWidget>
                                       children: [
                                         Padding(
                                           padding:
-                                              const EdgeInsetsDirectional.fromSTEB(
+                                              EdgeInsetsDirectional.fromSTEB(
                                                   0.0, 0.0, 0.0, 1.0),
                                           child: Container(
                                             width: double.infinity,
@@ -637,13 +646,13 @@ class _EmployeeProfileWidgetState extends State<EmployeeProfileWidget>
                                                   color: FlutterFlowTheme.of(
                                                           context)
                                                       .alternate,
-                                                  offset: const Offset(0.0, 1.0),
+                                                  offset: Offset(0.0, 1.0),
                                                 )
                                               ],
                                               shape: BoxShape.rectangle,
                                             ),
                                             child: Padding(
-                                              padding: const EdgeInsetsDirectional
+                                              padding: EdgeInsetsDirectional
                                                   .fromSTEB(
                                                       16.0, 0.0, 16.0, 0.0),
                                               child: InkWell(
@@ -686,7 +695,7 @@ class _EmployeeProfileWidgetState extends State<EmployeeProfileWidget>
                                                         Expanded(
                                                           child: Align(
                                                             alignment:
-                                                                const AlignmentDirectional(
+                                                                AlignmentDirectional(
                                                                     1.0, 0.0),
                                                             child: Icon(
                                                               Icons
@@ -708,7 +717,7 @@ class _EmployeeProfileWidgetState extends State<EmployeeProfileWidget>
                                         ),
                                         Padding(
                                           padding:
-                                              const EdgeInsetsDirectional.fromSTEB(
+                                              EdgeInsetsDirectional.fromSTEB(
                                                   0.0, 0.0, 0.0, 1.0),
                                           child: Container(
                                             width: double.infinity,
@@ -723,13 +732,13 @@ class _EmployeeProfileWidgetState extends State<EmployeeProfileWidget>
                                                   color: FlutterFlowTheme.of(
                                                           context)
                                                       .alternate,
-                                                  offset: const Offset(0.0, 1.0),
+                                                  offset: Offset(0.0, 1.0),
                                                 )
                                               ],
                                               shape: BoxShape.rectangle,
                                             ),
                                             child: Padding(
-                                              padding: const EdgeInsetsDirectional
+                                              padding: EdgeInsetsDirectional
                                                   .fromSTEB(
                                                       16.0, 0.0, 16.0, 0.0),
                                               child: InkWell(
@@ -772,7 +781,7 @@ class _EmployeeProfileWidgetState extends State<EmployeeProfileWidget>
                                                         Expanded(
                                                           child: Align(
                                                             alignment:
-                                                                const AlignmentDirectional(
+                                                                AlignmentDirectional(
                                                                     1.0, 0.0),
                                                             child: Icon(
                                                               Icons
@@ -794,7 +803,7 @@ class _EmployeeProfileWidgetState extends State<EmployeeProfileWidget>
                                         ),
                                         Padding(
                                           padding:
-                                              const EdgeInsetsDirectional.fromSTEB(
+                                              EdgeInsetsDirectional.fromSTEB(
                                                   0.0, 0.0, 0.0, 1.0),
                                           child: Container(
                                             width: double.infinity,
@@ -809,13 +818,13 @@ class _EmployeeProfileWidgetState extends State<EmployeeProfileWidget>
                                                   color: FlutterFlowTheme.of(
                                                           context)
                                                       .alternate,
-                                                  offset: const Offset(0.0, 1.0),
+                                                  offset: Offset(0.0, 1.0),
                                                 )
                                               ],
                                               shape: BoxShape.rectangle,
                                             ),
                                             child: Padding(
-                                              padding: const EdgeInsetsDirectional
+                                              padding: EdgeInsetsDirectional
                                                   .fromSTEB(
                                                       16.0, 0.0, 16.0, 0.0),
                                               child: InkWell(
@@ -857,7 +866,7 @@ class _EmployeeProfileWidgetState extends State<EmployeeProfileWidget>
                                                         Expanded(
                                                           child: Align(
                                                             alignment:
-                                                                const AlignmentDirectional(
+                                                                AlignmentDirectional(
                                                                     1.0, 0.0),
                                                             child: Icon(
                                                               Icons
@@ -879,7 +888,7 @@ class _EmployeeProfileWidgetState extends State<EmployeeProfileWidget>
                                         ),
                                         Align(
                                           alignment:
-                                              const AlignmentDirectional(0.0, 1.0),
+                                              AlignmentDirectional(0.0, 1.0),
                                           child: FutureBuilder<
                                               List<BookingsRecord>>(
                                             future: queryBookingsRecordOnce(
@@ -888,7 +897,7 @@ class _EmployeeProfileWidgetState extends State<EmployeeProfileWidget>
                                             builder: (context, snapshot) {
                                               // Customize what your widget looks like when it's loading.
                                               if (!snapshot.hasData) {
-                                                return const Center(
+                                                return Center(
                                                   child: SizedBox(
                                                     width: 50.0,
                                                     height: 50.0,
@@ -907,14 +916,14 @@ class _EmployeeProfileWidgetState extends State<EmployeeProfileWidget>
                                                   containerBookingsRecordList =
                                                   snapshot.data!;
                                               return Container(
-                                                decoration: const BoxDecoration(),
+                                                decoration: BoxDecoration(),
                                                 child: Align(
                                                   alignment:
-                                                      const AlignmentDirectional(
+                                                      AlignmentDirectional(
                                                           0.0, 1.0),
                                                   child: Padding(
                                                     padding:
-                                                        const EdgeInsetsDirectional
+                                                        EdgeInsetsDirectional
                                                             .fromSTEB(0.0, 24.0,
                                                                 0.0, 0.0),
                                                     child: FFButtonWidget(
@@ -946,7 +955,7 @@ class _EmployeeProfileWidgetState extends State<EmployeeProfileWidget>
                                                                 fontSize: 14.0,
                                                               ),
                                                             ),
-                                                            duration: const Duration(
+                                                            duration: Duration(
                                                                 milliseconds:
                                                                     4000),
                                                             backgroundColor:
@@ -961,14 +970,14 @@ class _EmployeeProfileWidgetState extends State<EmployeeProfileWidget>
                                                         width: double.infinity,
                                                         height: 50.0,
                                                         padding:
-                                                            const EdgeInsetsDirectional
+                                                            EdgeInsetsDirectional
                                                                 .fromSTEB(
                                                                     0.0,
                                                                     0.0,
                                                                     0.0,
                                                                     0.0),
                                                         iconPadding:
-                                                            const EdgeInsetsDirectional
+                                                            EdgeInsetsDirectional
                                                                 .fromSTEB(
                                                                     0.0,
                                                                     0.0,
@@ -1014,10 +1023,10 @@ class _EmployeeProfileWidgetState extends State<EmployeeProfileWidget>
                                         ),
                                         Align(
                                           alignment:
-                                              const AlignmentDirectional(0.0, 1.0),
+                                              AlignmentDirectional(0.0, 1.0),
                                           child: Padding(
                                             padding:
-                                                const EdgeInsetsDirectional.fromSTEB(
+                                                EdgeInsetsDirectional.fromSTEB(
                                                     0.0, 14.0, 0.0, 0.0),
                                             child: FFButtonWidget(
                                               onPressed: () async {
@@ -1034,11 +1043,11 @@ class _EmployeeProfileWidgetState extends State<EmployeeProfileWidget>
                                               options: FFButtonOptions(
                                                 width: double.infinity,
                                                 height: 50.0,
-                                                padding: const EdgeInsetsDirectional
+                                                padding: EdgeInsetsDirectional
                                                     .fromSTEB(
                                                         0.0, 0.0, 0.0, 0.0),
                                                 iconPadding:
-                                                    const EdgeInsetsDirectional
+                                                    EdgeInsetsDirectional
                                                         .fromSTEB(
                                                             0.0, 0.0, 0.0, 0.0),
                                                 color:
@@ -1072,10 +1081,10 @@ class _EmployeeProfileWidgetState extends State<EmployeeProfileWidget>
                                         ),
                                         Align(
                                           alignment:
-                                              const AlignmentDirectional(0.0, 1.0),
+                                              AlignmentDirectional(0.0, 1.0),
                                           child: Padding(
                                             padding:
-                                                const EdgeInsetsDirectional.fromSTEB(
+                                                EdgeInsetsDirectional.fromSTEB(
                                                     0.0, 25.0, 0.0, 0.0),
                                             child: FFButtonWidget(
                                               onPressed: () async {
@@ -1088,14 +1097,14 @@ class _EmployeeProfileWidgetState extends State<EmployeeProfileWidget>
                                               options: FFButtonOptions(
                                                 width: 135.0,
                                                 height: 36.0,
-                                                padding: const EdgeInsetsDirectional
+                                                padding: EdgeInsetsDirectional
                                                     .fromSTEB(
                                                         0.0, 0.0, 0.0, 0.0),
                                                 iconPadding:
-                                                    const EdgeInsetsDirectional
+                                                    EdgeInsetsDirectional
                                                         .fromSTEB(
                                                             0.0, 0.0, 0.0, 0.0),
-                                                color: const Color(0xFFE92929),
+                                                color: Color(0xFFE92929),
                                                 textStyle:
                                                     FlutterFlowTheme.of(context)
                                                         .titleSmall
@@ -1110,7 +1119,7 @@ class _EmployeeProfileWidgetState extends State<EmployeeProfileWidget>
                                                               FontWeight.w600,
                                                         ),
                                                 elevation: 0.0,
-                                                borderSide: const BorderSide(
+                                                borderSide: BorderSide(
                                                   color: Colors.transparent,
                                                   width: 2.0,
                                                 ),
@@ -1129,7 +1138,7 @@ class _EmployeeProfileWidgetState extends State<EmployeeProfileWidget>
                           ),
                         ),
                       ),
-                    ].addToEnd(const SizedBox(height: 72.0)),
+                    ].addToEnd(SizedBox(height: 72.0)),
                   ),
                 ),
               ),

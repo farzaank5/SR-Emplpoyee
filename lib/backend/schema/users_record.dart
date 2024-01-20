@@ -10,9 +10,9 @@ import '/flutter_flow/flutter_flow_util.dart';
 
 class UsersRecord extends FirestoreRecord {
   UsersRecord._(
-    super.reference,
-    super.data,
-  ) {
+    DocumentReference reference,
+    Map<String, dynamic> data,
+  ) : super(reference, data) {
     _initializeFields();
   }
 
@@ -81,6 +81,16 @@ class UsersRecord extends FirestoreRecord {
   double get currentMonthEarning => _currentMonthEarning ?? 0.0;
   bool hasCurrentMonthEarning() => _currentMonthEarning != null;
 
+  // "month" field.
+  int? _month;
+  int get month => _month ?? 0;
+  bool hasMonth() => _month != null;
+
+  // "role" field.
+  bool? _role;
+  bool get role => _role ?? false;
+  bool hasRole() => _role != null;
+
   void _initializeFields() {
     _email = snapshotData['email'] as String?;
     _displayName = snapshotData['display_name'] as String?;
@@ -96,6 +106,8 @@ class UsersRecord extends FirestoreRecord {
     _loginpassword = snapshotData['loginpassword'] as String?;
     _currentMonthEarning =
         castToType<double>(snapshotData['currentMonthEarning']);
+    _month = castToType<int>(snapshotData['month']);
+    _role = snapshotData['role'] as bool?;
   }
 
   static CollectionReference get collection =>
@@ -144,6 +156,8 @@ Map<String, dynamic> createUsersRecordData({
   double? earnings,
   String? loginpassword,
   double? currentMonthEarning,
+  int? month,
+  bool? role,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -159,6 +173,8 @@ Map<String, dynamic> createUsersRecordData({
       'earnings': earnings,
       'loginpassword': loginpassword,
       'currentMonthEarning': currentMonthEarning,
+      'month': month,
+      'role': role,
     }.withoutNulls,
   );
 
@@ -183,7 +199,9 @@ class UsersRecordDocumentEquality implements Equality<UsersRecord> {
         e1?.aadharnumber == e2?.aadharnumber &&
         e1?.earnings == e2?.earnings &&
         e1?.loginpassword == e2?.loginpassword &&
-        e1?.currentMonthEarning == e2?.currentMonthEarning;
+        e1?.currentMonthEarning == e2?.currentMonthEarning &&
+        e1?.month == e2?.month &&
+        e1?.role == e2?.role;
   }
 
   @override
@@ -200,7 +218,9 @@ class UsersRecordDocumentEquality implements Equality<UsersRecord> {
         e?.aadharnumber,
         e?.earnings,
         e?.loginpassword,
-        e?.currentMonthEarning
+        e?.currentMonthEarning,
+        e?.month,
+        e?.role
       ]);
 
   @override

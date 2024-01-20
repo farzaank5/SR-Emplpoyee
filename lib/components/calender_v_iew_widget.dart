@@ -3,15 +3,17 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'calender_v_iew_model.dart';
 export 'calender_v_iew_model.dart';
 
 class CalenderVIewWidget extends StatefulWidget {
   const CalenderVIewWidget({
-    super.key,
+    Key? key,
     required this.startDate,
-  });
+  }) : super(key: key);
 
   final bool? startDate;
 
@@ -46,7 +48,7 @@ class _CalenderVIewWidgetState extends State<CalenderVIewWidget> {
     context.watch<FFAppState>();
 
     return Container(
-      decoration: const BoxDecoration(
+      decoration: BoxDecoration(
         color: Color(0xFFF6F6F6),
       ),
       child: Column(
@@ -80,7 +82,7 @@ class _CalenderVIewWidgetState extends State<CalenderVIewWidget> {
             inactiveDateStyle: FlutterFlowTheme.of(context).labelMedium,
           ),
           Padding(
-            padding: const EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 10.0),
+            padding: EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 10.0),
             child: FFButtonWidget(
               onPressed: () async {
                 Navigator.pop(context);
@@ -88,15 +90,15 @@ class _CalenderVIewWidgetState extends State<CalenderVIewWidget> {
               text: 'Set Date',
               options: FFButtonOptions(
                 height: 40.0,
-                padding: const EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
-                iconPadding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                padding: EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
+                iconPadding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                 color: Colors.black,
                 textStyle: FlutterFlowTheme.of(context).titleSmall.override(
                       fontFamily: 'Plus Jakarta Sans',
                       color: Colors.white,
                     ),
                 elevation: 3.0,
-                borderSide: const BorderSide(
+                borderSide: BorderSide(
                   color: Colors.transparent,
                   width: 1.0,
                 ),
