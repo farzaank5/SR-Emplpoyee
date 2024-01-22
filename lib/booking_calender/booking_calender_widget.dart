@@ -114,6 +114,13 @@ class _BookingCalenderWidgetState extends State<BookingCalenderWidget> {
                   context.pop();
                 },
               ),
+              title: Align(
+                alignment: AlignmentDirectional(-1.0, 0.0),
+                child: Text(
+                  'Villa availability',
+                  style: FlutterFlowTheme.of(context).titleLarge,
+                ),
+              ),
               actions: [],
               centerTitle: true,
               elevation: 2.0,
@@ -144,12 +151,57 @@ class _BookingCalenderWidgetState extends State<BookingCalenderWidget> {
                       mainAxisSize: MainAxisSize.max,
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        Align(
-                          alignment: AlignmentDirectional(-1.0, 0.0),
-                          child: Text(
-                            columnVillasRecord.displayName,
-                            style: FlutterFlowTheme.of(context).titleLarge,
-                          ),
+                        Row(
+                          mainAxisSize: MainAxisSize.max,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Align(
+                              alignment: AlignmentDirectional(-1.0, 0.0),
+                              child: Text(
+                                columnVillasRecord.displayName,
+                                style: FlutterFlowTheme.of(context)
+                                    .titleLarge
+                                    .override(
+                                      fontFamily: 'Outfit',
+                                      fontSize: 20.0,
+                                    ),
+                              ),
+                            ),
+                            FFButtonWidget(
+                              onPressed: () async {
+                                setState(() {
+                                  _model.selecteddate = [];
+                                });
+                              },
+                              text: '',
+                              icon: Icon(
+                                Icons.restart_alt_sharp,
+                                size: 25.0,
+                              ),
+                              options: FFButtonOptions(
+                                width: 58.0,
+                                height: 55.0,
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    8.0, 0.0, 0.0, 0.0),
+                                iconPadding: EdgeInsetsDirectional.fromSTEB(
+                                    0.0, 0.0, 0.0, 0.0),
+                                color: FlutterFlowTheme.of(context).primary,
+                                textStyle: FlutterFlowTheme.of(context)
+                                    .titleSmall
+                                    .override(
+                                      fontFamily: 'Plus Jakarta Sans',
+                                      color: Colors.white,
+                                      fontSize: 13.0,
+                                    ),
+                                elevation: 3.0,
+                                borderSide: BorderSide(
+                                  color: Colors.transparent,
+                                  width: 1.0,
+                                ),
+                                borderRadius: BorderRadius.circular(8.0),
+                              ),
+                            ),
+                          ],
                         ),
                         Align(
                           alignment: AlignmentDirectional(0.0, 1.0),
@@ -184,94 +236,78 @@ class _BookingCalenderWidgetState extends State<BookingCalenderWidget> {
                                           mainAxisAlignment:
                                               MainAxisAlignment.spaceBetween,
                                           crossAxisAlignment:
-                                              CrossAxisAlignment.start,
+                                              CrossAxisAlignment.center,
                                           children: [
-                                            FFButtonWidget(
-                                              onPressed: () async {
+                                            InkWell(
+                                              splashColor: Colors.transparent,
+                                              focusColor: Colors.transparent,
+                                              hoverColor: Colors.transparent,
+                                              highlightColor:
+                                                  Colors.transparent,
+                                              onTap: () async {
                                                 setState(() {
-                                                  _model.selecteddate = [];
+                                                  _model.month =
+                                                      _model.month! + -1;
                                                 });
                                               },
-                                              text: '',
-                                              icon: Icon(
-                                                Icons.restart_alt_sharp,
-                                                size: 25.0,
-                                              ),
-                                              options: FFButtonOptions(
-                                                width: 58.0,
-                                                height: 55.0,
-                                                padding: EdgeInsetsDirectional
-                                                    .fromSTEB(
-                                                        8.0, 0.0, 0.0, 0.0),
-                                                iconPadding:
-                                                    EdgeInsetsDirectional
-                                                        .fromSTEB(
-                                                            0.0, 0.0, 0.0, 0.0),
+                                              child: Icon(
+                                                Icons
+                                                    .arrow_back_ios_new_rounded,
                                                 color:
                                                     FlutterFlowTheme.of(context)
                                                         .primary,
-                                                textStyle:
-                                                    FlutterFlowTheme.of(context)
-                                                        .titleSmall
+                                                size: 20.0,
+                                              ),
+                                            ),
+                                            Padding(
+                                              padding: EdgeInsetsDirectional
+                                                  .fromSTEB(
+                                                      15.0, 0.0, 0.0, 0.0),
+                                              child: Column(
+                                                mainAxisSize: MainAxisSize.max,
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.center,
+                                                children: [
+                                                  Text(
+                                                    getJsonField(
+                                                      functions.yearmonth(
+                                                          _model.month,
+                                                          getCurrentTimestamp),
+                                                      r'''$.month''',
+                                                    ).toString(),
+                                                    style: FlutterFlowTheme.of(
+                                                            context)
+                                                        .bodyMedium
                                                         .override(
                                                           fontFamily:
                                                               'Plus Jakarta Sans',
-                                                          color: Colors.white,
-                                                          fontSize: 13.0,
+                                                          fontSize: 25.0,
+                                                          fontWeight:
+                                                              FontWeight.bold,
                                                         ),
-                                                elevation: 3.0,
-                                                borderSide: BorderSide(
-                                                  color: Colors.transparent,
-                                                  width: 1.0,
-                                                ),
-                                                borderRadius:
-                                                    BorderRadius.circular(8.0),
+                                                  ),
+                                                  Text(
+                                                    getJsonField(
+                                                      functions.yearmonth(
+                                                          _model.month,
+                                                          getCurrentTimestamp),
+                                                      r'''$.year''',
+                                                    ).toString(),
+                                                    style: FlutterFlowTheme.of(
+                                                            context)
+                                                        .bodyMedium
+                                                        .override(
+                                                          fontFamily:
+                                                              'Plus Jakarta Sans',
+                                                          fontSize: 20.0,
+                                                          fontWeight:
+                                                              FontWeight.w600,
+                                                        ),
+                                                  ),
+                                                ],
                                               ),
-                                            ),
-                                            Column(
-                                              mainAxisSize: MainAxisSize.max,
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.center,
-                                              children: [
-                                                Text(
-                                                  getJsonField(
-                                                    functions.yearmonth(
-                                                        _model.month,
-                                                        getCurrentTimestamp),
-                                                    r'''$.month''',
-                                                  ).toString(),
-                                                  style: FlutterFlowTheme.of(
-                                                          context)
-                                                      .bodyMedium
-                                                      .override(
-                                                        fontFamily:
-                                                            'Plus Jakarta Sans',
-                                                        fontSize: 25.0,
-                                                        fontWeight:
-                                                            FontWeight.bold,
-                                                      ),
-                                                ),
-                                                Text(
-                                                  getJsonField(
-                                                    functions.yearmonth(
-                                                        _model.month,
-                                                        getCurrentTimestamp),
-                                                    r'''$.year''',
-                                                  ).toString(),
-                                                  style: FlutterFlowTheme.of(
-                                                          context)
-                                                      .bodyMedium
-                                                      .override(
-                                                        fontFamily:
-                                                            'Plus Jakarta Sans',
-                                                        fontSize: 20.0,
-                                                        fontWeight:
-                                                            FontWeight.w600,
-                                                      ),
-                                                ),
-                                              ],
                                             ),
                                             Padding(
                                               padding: EdgeInsetsDirectional
@@ -279,54 +315,35 @@ class _BookingCalenderWidgetState extends State<BookingCalenderWidget> {
                                               child: Row(
                                                 mainAxisSize: MainAxisSize.max,
                                                 children: [
-                                                  InkWell(
-                                                    splashColor:
-                                                        Colors.transparent,
-                                                    focusColor:
-                                                        Colors.transparent,
-                                                    hoverColor:
-                                                        Colors.transparent,
-                                                    highlightColor:
-                                                        Colors.transparent,
-                                                    onTap: () async {
-                                                      setState(() {
-                                                        _model.month =
-                                                            _model.month! + -1;
-                                                      });
-                                                    },
-                                                    child: Icon(
-                                                      Icons
-                                                          .arrow_back_ios_new_rounded,
-                                                      color:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .primary,
-                                                      size: 20.0,
-                                                    ),
-                                                  ),
-                                                  InkWell(
-                                                    splashColor:
-                                                        Colors.transparent,
-                                                    focusColor:
-                                                        Colors.transparent,
-                                                    hoverColor:
-                                                        Colors.transparent,
-                                                    highlightColor:
-                                                        Colors.transparent,
-                                                    onTap: () async {
-                                                      setState(() {
-                                                        _model.month =
-                                                            _model.month! + 1;
-                                                      });
-                                                    },
-                                                    child: Icon(
-                                                      Icons
-                                                          .arrow_forward_ios_outlined,
-                                                      color:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .primary,
-                                                      size: 20.0,
+                                                  Padding(
+                                                    padding:
+                                                        EdgeInsetsDirectional
+                                                            .fromSTEB(20.0, 0.0,
+                                                                0.0, 0.0),
+                                                    child: InkWell(
+                                                      splashColor:
+                                                          Colors.transparent,
+                                                      focusColor:
+                                                          Colors.transparent,
+                                                      hoverColor:
+                                                          Colors.transparent,
+                                                      highlightColor:
+                                                          Colors.transparent,
+                                                      onTap: () async {
+                                                        setState(() {
+                                                          _model.month =
+                                                              _model.month! + 1;
+                                                        });
+                                                      },
+                                                      child: Icon(
+                                                        Icons
+                                                            .arrow_forward_ios_outlined,
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .primary,
+                                                        size: 20.0,
+                                                      ),
                                                     ),
                                                   ),
                                                 ].divide(SizedBox(width: 15.0)),

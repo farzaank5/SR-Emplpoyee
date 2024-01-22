@@ -9,8 +9,6 @@ import '/backend/schema/structs/index.dart';
 
 import '/auth/base_auth_user_provider.dart';
 
-import '/backend/push_notifications/push_notifications_handler.dart'
-    show PushNotificationsHandler;
 import '/index.dart';
 import '/main.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -134,9 +132,9 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               : BookmarkedWidget(),
         ),
         FFRoute(
-          name: 'bookingHistory',
-          path: '/bookingHistory',
-          builder: (context, params) => BookingHistoryWidget(),
+          name: 'bookingshistory',
+          path: '/bookingshistory',
+          builder: (context, params) => BookingshistoryWidget(),
         ),
         FFRoute(
           name: 'villasDetails',
@@ -162,18 +160,13 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           ),
         ),
         FFRoute(
-          name: 'currentBookings',
-          path: '/currentBookings',
-          builder: (context, params) => CurrentBookingsWidget(),
-        ),
-        FFRoute(
           name: 'employee_Profile',
           path: '/employeeProfile',
           requireAuth: true,
           builder: (context, params) => params.isEmpty
               ? NavBarPage(initialPage: 'employee_Profile')
               : EmployeeProfileWidget(
-                  hii: params.getParam('hii', ParamType.String),
+                  enddate: params.getParam('enddate', ParamType.DateTime),
                 ),
         ),
         FFRoute(
@@ -190,6 +183,21 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => BookingCalenderCopyWidget(
             villaref: params.getParam(
                 'villaref', ParamType.DocumentReference, false, ['villas']),
+          ),
+        ),
+        FFRoute(
+          name: 'Bookingcancel',
+          path: '/bookingcancel',
+          builder: (context, params) => BookingcancelWidget(),
+        ),
+        FFRoute(
+          name: 'cancellationpage',
+          path: '/cancellationpage',
+          builder: (context, params) => CancellationpageWidget(
+            placeRef: params.getParam(
+                'placeRef', ParamType.DocumentReference, false, ['villas']),
+            bookingRef: params.getParam('bookingRef',
+                ParamType.DocumentReference, false, ['users', 'bookings']),
           ),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
@@ -377,7 +385,7 @@ class FFRoute {
                     fit: BoxFit.fitHeight,
                   ),
                 )
-              : PushNotificationsHandler(child: page);
+              : page;
 
           final transitionInfo = state.transitionInfo;
           return transitionInfo.hasTransition

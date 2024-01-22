@@ -1,6 +1,5 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
-import '/backend/push_notifications/push_notifications_util.dart';
 import '/flutter_flow/flutter_flow_choice_chips.dart';
 import '/flutter_flow/flutter_flow_count_controller.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
@@ -10,7 +9,6 @@ import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/form_field_controller.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -581,7 +579,7 @@ class _VillasBookingDetailsWidgetState
                                 autofocus: true,
                                 obscureText: false,
                                 decoration: InputDecoration(
-                                  labelText: '        Verifcation ID',
+                                  labelText: '         Verification ID',
                                   labelStyle:
                                       FlutterFlowTheme.of(context).labelMedium,
                                   hintStyle:
@@ -617,7 +615,13 @@ class _VillasBookingDetailsWidgetState
                                     borderRadius: BorderRadius.circular(8.0),
                                   ),
                                 ),
-                                style: FlutterFlowTheme.of(context).bodyMedium,
+                                style: FlutterFlowTheme.of(context)
+                                    .bodyMedium
+                                    .override(
+                                      fontFamily: 'Plus Jakarta Sans',
+                                      fontSize: 14.0,
+                                      fontWeight: FontWeight.normal,
+                                    ),
                                 validator: _model
                                     .verificationControllerValidator
                                     .asValidator(context),
@@ -957,7 +961,7 @@ class _VillasBookingDetailsWidgetState
                                     maxChildren:
                                         _model.countControllerchildrenValue,
                                     contactInfo: int.tryParse(
-                                        _model.nameController.text),
+                                        _model.contactController.text),
                                     verificationID: int.tryParse(
                                         _model.verificationController.text),
                                     firstname: _model.nameController.text,
@@ -1178,19 +1182,6 @@ class _VillasBookingDetailsWidgetState
                                       },
                                     ),
                                   });
-                                  _model.allusers =
-                                      await queryUsersRecordOnce();
-                                  triggerPushNotification(
-                                    notificationTitle: 'Villa got Booked!!',
-                                    notificationText:
-                                        '${villasBookingDetailsVillasRecord.displayName} got booked from ${dateTimeFormat('yMMMd', widget.startDate)} - ${dateTimeFormat('yMMMd', widget.endDate)} click here to make more bookings.',
-                                    notificationSound: 'default',
-                                    userRefs: _model.allusers!
-                                        .map((e) => e.reference)
-                                        .toList(),
-                                    initialPageName: 'Employee_home',
-                                    parameterData: {},
-                                  );
 
                                   context.pushNamed(
                                     'bookingconfirmed',

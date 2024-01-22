@@ -5,7 +5,7 @@ import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import 'booking_history_widget.dart' show BookingHistoryWidget;
+import 'bookingshistory_widget.dart' show BookingshistoryWidget;
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
@@ -13,7 +13,7 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
-class BookingHistoryModel extends FlutterFlowModel<BookingHistoryWidget> {
+class BookingshistoryModel extends FlutterFlowModel<BookingshistoryWidget> {
   ///  Local state fields for this page.
 
   bool searchBool = false;

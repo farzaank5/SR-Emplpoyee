@@ -145,12 +145,52 @@ class _BookingCalenderCopyWidgetState extends State<BookingCalenderCopyWidget> {
                       mainAxisSize: MainAxisSize.max,
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        Align(
-                          alignment: AlignmentDirectional(-1.0, 0.0),
-                          child: Text(
-                            columnVillasRecord.displayName,
-                            style: FlutterFlowTheme.of(context).titleLarge,
-                          ),
+                        Row(
+                          mainAxisSize: MainAxisSize.max,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Align(
+                              alignment: AlignmentDirectional(-1.0, 0.0),
+                              child: Text(
+                                columnVillasRecord.displayName,
+                                style: FlutterFlowTheme.of(context).titleLarge,
+                              ),
+                            ),
+                            FFButtonWidget(
+                              onPressed: () async {
+                                setState(() {
+                                  _model.selecteddate = [];
+                                });
+                              },
+                              text: '',
+                              icon: Icon(
+                                Icons.restart_alt_sharp,
+                                size: 25.0,
+                              ),
+                              options: FFButtonOptions(
+                                width: 48.0,
+                                height: 48.0,
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    8.0, 0.0, 0.0, 0.0),
+                                iconPadding: EdgeInsetsDirectional.fromSTEB(
+                                    0.0, 0.0, 0.0, 0.0),
+                                color: FlutterFlowTheme.of(context).primary,
+                                textStyle: FlutterFlowTheme.of(context)
+                                    .titleSmall
+                                    .override(
+                                      fontFamily: 'Plus Jakarta Sans',
+                                      color: Colors.white,
+                                      fontSize: 13.0,
+                                    ),
+                                elevation: 3.0,
+                                borderSide: BorderSide(
+                                  color: Colors.transparent,
+                                  width: 1.0,
+                                ),
+                                borderRadius: BorderRadius.circular(8.0),
+                              ),
+                            ),
+                          ],
                         ),
                         Align(
                           alignment: AlignmentDirectional(0.0, 1.0),
@@ -185,56 +225,43 @@ class _BookingCalenderCopyWidgetState extends State<BookingCalenderCopyWidget> {
                                           mainAxisAlignment:
                                               MainAxisAlignment.spaceBetween,
                                           crossAxisAlignment:
-                                              CrossAxisAlignment.start,
+                                              CrossAxisAlignment.center,
                                           children: [
-                                            FFButtonWidget(
-                                              onPressed: () async {
-                                                setState(() {
-                                                  _model.selecteddate = [];
-                                                });
-                                              },
-                                              text: '',
-                                              icon: Icon(
-                                                Icons.restart_alt_sharp,
-                                                size: 25.0,
-                                              ),
-                                              options: FFButtonOptions(
-                                                width: 48.0,
-                                                height: 48.0,
-                                                padding: EdgeInsetsDirectional
-                                                    .fromSTEB(
-                                                        8.0, 0.0, 0.0, 0.0),
-                                                iconPadding:
-                                                    EdgeInsetsDirectional
-                                                        .fromSTEB(
-                                                            0.0, 0.0, 0.0, 0.0),
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .primary,
-                                                textStyle:
-                                                    FlutterFlowTheme.of(context)
-                                                        .titleSmall
-                                                        .override(
-                                                          fontFamily:
-                                                              'Plus Jakarta Sans',
-                                                          color: Colors.white,
-                                                          fontSize: 13.0,
-                                                        ),
-                                                elevation: 3.0,
-                                                borderSide: BorderSide(
-                                                  color: Colors.transparent,
-                                                  width: 1.0,
-                                                ),
-                                                borderRadius:
-                                                    BorderRadius.circular(8.0),
-                                              ),
-                                            ),
                                             Column(
                                               mainAxisSize: MainAxisSize.max,
                                               mainAxisAlignment:
                                                   MainAxisAlignment.center,
                                               crossAxisAlignment:
                                                   CrossAxisAlignment.center,
+                                              children: [
+                                                InkWell(
+                                                  splashColor:
+                                                      Colors.transparent,
+                                                  focusColor:
+                                                      Colors.transparent,
+                                                  hoverColor:
+                                                      Colors.transparent,
+                                                  highlightColor:
+                                                      Colors.transparent,
+                                                  onTap: () async {
+                                                    setState(() {
+                                                      _model.month =
+                                                          _model.month! + -1;
+                                                    });
+                                                  },
+                                                  child: Icon(
+                                                    Icons
+                                                        .arrow_back_ios_new_rounded,
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .primary,
+                                                    size: 20.0,
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                            Column(
+                                              mainAxisSize: MainAxisSize.max,
                                               children: [
                                                 Text(
                                                   getJsonField(
@@ -280,31 +307,6 @@ class _BookingCalenderCopyWidgetState extends State<BookingCalenderCopyWidget> {
                                               child: Row(
                                                 mainAxisSize: MainAxisSize.max,
                                                 children: [
-                                                  InkWell(
-                                                    splashColor:
-                                                        Colors.transparent,
-                                                    focusColor:
-                                                        Colors.transparent,
-                                                    hoverColor:
-                                                        Colors.transparent,
-                                                    highlightColor:
-                                                        Colors.transparent,
-                                                    onTap: () async {
-                                                      setState(() {
-                                                        _model.month =
-                                                            _model.month! + -1;
-                                                      });
-                                                    },
-                                                    child: Icon(
-                                                      Icons
-                                                          .arrow_back_ios_new_rounded,
-                                                      color:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .primary,
-                                                      size: 20.0,
-                                                    ),
-                                                  ),
                                                   InkWell(
                                                     splashColor:
                                                         Colors.transparent,

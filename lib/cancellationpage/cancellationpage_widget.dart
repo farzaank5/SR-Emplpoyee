@@ -1,18 +1,20 @@
+import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'villas_details_model.dart';
-export 'villas_details_model.dart';
+import 'cancellationpage_model.dart';
+export 'cancellationpage_model.dart';
 
-class VillasDetailsWidget extends StatefulWidget {
-  const VillasDetailsWidget({
+class CancellationpageWidget extends StatefulWidget {
+  const CancellationpageWidget({
     Key? key,
     required this.placeRef,
     required this.bookingRef,
@@ -22,18 +24,18 @@ class VillasDetailsWidget extends StatefulWidget {
   final DocumentReference? bookingRef;
 
   @override
-  _VillasDetailsWidgetState createState() => _VillasDetailsWidgetState();
+  _CancellationpageWidgetState createState() => _CancellationpageWidgetState();
 }
 
-class _VillasDetailsWidgetState extends State<VillasDetailsWidget> {
-  late VillasDetailsModel _model;
+class _CancellationpageWidgetState extends State<CancellationpageWidget> {
+  late CancellationpageModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => VillasDetailsModel());
+    _model = createModel(context, () => CancellationpageModel());
   }
 
   @override
@@ -76,7 +78,7 @@ class _VillasDetailsWidgetState extends State<VillasDetailsWidget> {
             ),
           );
         }
-        final villasDetailsBookingsRecord = snapshot.data!;
+        final cancellationpageBookingsRecord = snapshot.data!;
         return Scaffold(
           key: scaffoldKey,
           backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
@@ -118,7 +120,7 @@ class _VillasDetailsWidgetState extends State<VillasDetailsWidget> {
                           padding: EdgeInsetsDirectional.fromSTEB(
                               16.0, 0.0, 0.0, 0.0),
                           child: Text(
-                            'Booking Details',
+                            'Cancel page',
                             style: FlutterFlowTheme.of(context).headlineMedium,
                           ),
                         ),
@@ -126,7 +128,7 @@ class _VillasDetailsWidgetState extends State<VillasDetailsWidget> {
                           padding: EdgeInsetsDirectional.fromSTEB(
                               16.0, 12.0, 0.0, 0.0),
                           child: Text(
-                            villasDetailsBookingsRecord.name,
+                            cancellationpageBookingsRecord.name,
                             style: FlutterFlowTheme.of(context).headlineMedium,
                           ),
                         ),
@@ -134,7 +136,7 @@ class _VillasDetailsWidgetState extends State<VillasDetailsWidget> {
                           padding: EdgeInsetsDirectional.fromSTEB(
                               16.0, 8.0, 0.0, 0.0),
                           child: Text(
-                            villasDetailsBookingsRecord.location,
+                            cancellationpageBookingsRecord.location,
                             style: FlutterFlowTheme.of(context).labelMedium,
                           ),
                         ),
@@ -156,7 +158,7 @@ class _VillasDetailsWidgetState extends State<VillasDetailsWidget> {
                               ),
                               Text(
                                 formatNumber(
-                                  villasDetailsBookingsRecord.earnings,
+                                  cancellationpageBookingsRecord.earnings,
                                   formatType: FormatType.decimal,
                                   decimalType: DecimalType.periodDecimal,
                                   currency: 'Rs.',
@@ -178,8 +180,10 @@ class _VillasDetailsWidgetState extends State<VillasDetailsWidget> {
                                 style: FlutterFlowTheme.of(context).labelMedium,
                               ),
                               Text(
-                                dateTimeFormat('MMMEd',
-                                    villasDetailsBookingsRecord.createdTime!),
+                                dateTimeFormat(
+                                    'MMMEd',
+                                    cancellationpageBookingsRecord
+                                        .createdTime!),
                                 style: FlutterFlowTheme.of(context).bodyLarge,
                               ),
                             ],
@@ -198,7 +202,7 @@ class _VillasDetailsWidgetState extends State<VillasDetailsWidget> {
                               ),
                               Text(
                                 dateTimeFormat('yMMMd',
-                                    villasDetailsBookingsRecord.startDate!),
+                                    cancellationpageBookingsRecord.startDate!),
                                 style: FlutterFlowTheme.of(context).bodyLarge,
                               ),
                             ],
@@ -217,7 +221,7 @@ class _VillasDetailsWidgetState extends State<VillasDetailsWidget> {
                               ),
                               Text(
                                 dateTimeFormat('yMMMd',
-                                    villasDetailsBookingsRecord.endDate!),
+                                    cancellationpageBookingsRecord.endDate!),
                                 style: FlutterFlowTheme.of(context).bodyLarge,
                               ),
                             ],
@@ -241,7 +245,7 @@ class _VillasDetailsWidgetState extends State<VillasDetailsWidget> {
                               ),
                               Text(
                                 formatNumber(
-                                  villasDetailsBookingsRecord.price,
+                                  cancellationpageBookingsRecord.price,
                                   formatType: FormatType.decimal,
                                   decimalType: DecimalType.periodDecimal,
                                   currency: 'Rs.',
@@ -260,6 +264,58 @@ class _VillasDetailsWidgetState extends State<VillasDetailsWidget> {
                   height: 36.0,
                   thickness: 1.0,
                   color: FlutterFlowTheme.of(context).primary,
+                ),
+                Align(
+                  alignment: AlignmentDirectional(0.0, 1.0),
+                  child: Padding(
+                    padding:
+                        EdgeInsetsDirectional.fromSTEB(0.0, 100.0, 0.0, 0.0),
+                    child: FFButtonWidget(
+                      onPressed: () async {
+                        await widget.bookingRef!.delete();
+                        context.safePop();
+                        ScaffoldMessenger.of(context).clearSnackBars();
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text(
+                              'Succesfully cancelled',
+                              style: TextStyle(
+                                color: FlutterFlowTheme.of(context)
+                                    .primaryBackground,
+                              ),
+                            ),
+                            duration: Duration(milliseconds: 4000),
+                            backgroundColor:
+                                FlutterFlowTheme.of(context).secondary,
+                          ),
+                        );
+                        _model.allemp = await queryUsersRecordOnce();
+
+                        setState(() {});
+                      },
+                      text: 'Cancel Booking',
+                      options: FFButtonOptions(
+                        width: 350.0,
+                        height: 40.0,
+                        padding: EdgeInsetsDirectional.fromSTEB(
+                            24.0, 0.0, 24.0, 0.0),
+                        iconPadding:
+                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                        color: Color(0xFFFF0000),
+                        textStyle:
+                            FlutterFlowTheme.of(context).titleSmall.override(
+                                  fontFamily: 'Plus Jakarta Sans',
+                                  color: Colors.white,
+                                ),
+                        elevation: 3.0,
+                        borderSide: BorderSide(
+                          color: Colors.transparent,
+                          width: 1.0,
+                        ),
+                        borderRadius: BorderRadius.circular(8.0),
+                      ),
+                    ),
+                  ),
                 ),
               ],
             ),

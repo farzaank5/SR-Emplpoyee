@@ -19,11 +19,10 @@ export 'employee_profile_model.dart';
 class EmployeeProfileWidget extends StatefulWidget {
   const EmployeeProfileWidget({
     Key? key,
-    String? hii,
-  })  : this.hii = hii ?? '1',
-        super(key: key);
+    this.enddate,
+  }) : super(key: key);
 
-  final String hii;
+  final DateTime? enddate;
 
   @override
   _EmployeeProfileWidgetState createState() => _EmployeeProfileWidgetState();
@@ -56,25 +55,6 @@ class _EmployeeProfileWidgetState extends State<EmployeeProfileWidget>
       ],
     ),
     'containerOnPageLoadAnimation2': AnimationInfo(
-      trigger: AnimationTrigger.onPageLoad,
-      effects: [
-        FadeEffect(
-          curve: Curves.easeInOut,
-          delay: 0.ms,
-          duration: 600.ms,
-          begin: 0.0,
-          end: 1.0,
-        ),
-        MoveEffect(
-          curve: Curves.easeInOut,
-          delay: 0.ms,
-          duration: 600.ms,
-          begin: Offset(0.0, 90.0),
-          end: Offset(0.0, 0.0),
-        ),
-      ],
-    ),
-    'containerOnPageLoadAnimation3': AnimationInfo(
       trigger: AnimationTrigger.onPageLoad,
       effects: [
         FadeEffect(
@@ -418,119 +398,6 @@ class _EmployeeProfileWidgetState extends State<EmployeeProfileWidget>
                                               padding: EdgeInsetsDirectional
                                                   .fromSTEB(
                                                       0.0, 0.0, 0.0, 12.0),
-                                              child: FutureBuilder<int>(
-                                                future:
-                                                    queryBookingsRecordCount(
-                                                  parent: currentUserReference,
-                                                  queryBuilder:
-                                                      (bookingsRecord) =>
-                                                          bookingsRecord.where(
-                                                    'endDate',
-                                                    isGreaterThanOrEqualTo:
-                                                        getCurrentTimestamp,
-                                                  ),
-                                                ),
-                                                builder: (context, snapshot) {
-                                                  // Customize what your widget looks like when it's loading.
-                                                  if (!snapshot.hasData) {
-                                                    return Center(
-                                                      child: SizedBox(
-                                                        width: 50.0,
-                                                        height: 50.0,
-                                                        child:
-                                                            CircularProgressIndicator(
-                                                          valueColor:
-                                                              AlwaysStoppedAnimation<
-                                                                  Color>(
-                                                            Colors.black,
-                                                          ),
-                                                        ),
-                                                      ),
-                                                    );
-                                                  }
-                                                  int containerCount =
-                                                      snapshot.data!;
-                                                  return Container(
-                                                    width: double.infinity,
-                                                    decoration: BoxDecoration(
-                                                      color: FlutterFlowTheme
-                                                              .of(context)
-                                                          .secondaryBackground,
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              8.0),
-                                                    ),
-                                                    child: Padding(
-                                                      padding:
-                                                          EdgeInsetsDirectional
-                                                              .fromSTEB(
-                                                                  0.0,
-                                                                  12.0,
-                                                                  0.0,
-                                                                  0.0),
-                                                      child: Column(
-                                                        mainAxisSize:
-                                                            MainAxisSize.max,
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .center,
-                                                        children: [
-                                                          Icon(
-                                                            Icons
-                                                                .supervisor_account_rounded,
-                                                            color: FlutterFlowTheme
-                                                                    .of(context)
-                                                                .primaryText,
-                                                            size: 32.0,
-                                                          ),
-                                                          Padding(
-                                                            padding:
-                                                                EdgeInsetsDirectional
-                                                                    .fromSTEB(
-                                                                        0.0,
-                                                                        8.0,
-                                                                        0.0,
-                                                                        4.0),
-                                                            child: Text(
-                                                              formatNumber(
-                                                                containerCount,
-                                                                formatType:
-                                                                    FormatType
-                                                                        .decimal,
-                                                                decimalType:
-                                                                    DecimalType
-                                                                        .automatic,
-                                                              ),
-                                                              textAlign:
-                                                                  TextAlign
-                                                                      .center,
-                                                              style: FlutterFlowTheme
-                                                                      .of(context)
-                                                                  .headlineSmall,
-                                                            ),
-                                                          ),
-                                                          Text(
-                                                            'Current Bookings',
-                                                            textAlign: TextAlign
-                                                                .center,
-                                                            style: FlutterFlowTheme
-                                                                    .of(context)
-                                                                .labelMedium,
-                                                          ),
-                                                        ],
-                                                      ),
-                                                    ),
-                                                  ).animateOnPageLoad(animationsMap[
-                                                      'containerOnPageLoadAnimation2']!);
-                                                },
-                                              ),
-                                            ),
-                                          ),
-                                          Expanded(
-                                            child: Padding(
-                                              padding: EdgeInsetsDirectional
-                                                  .fromSTEB(
-                                                      0.0, 0.0, 0.0, 12.0),
                                               child: Container(
                                                 width: double.infinity,
                                                 decoration: BoxDecoration(
@@ -552,12 +419,6 @@ class _EmployeeProfileWidgetState extends State<EmployeeProfileWidget>
                                                         MainAxisAlignment
                                                             .spaceEvenly,
                                                     children: [
-                                                      Icon(
-                                                        Icons
-                                                            .ssid_chart_rounded,
-                                                        color: Colors.black,
-                                                        size: 44.0,
-                                                      ),
                                                       Padding(
                                                         padding:
                                                             EdgeInsetsDirectional
@@ -588,6 +449,12 @@ class _EmployeeProfileWidgetState extends State<EmployeeProfileWidget>
                                                           ),
                                                         ),
                                                       ),
+                                                      Icon(
+                                                        Icons
+                                                            .ssid_chart_rounded,
+                                                        color: Colors.black,
+                                                        size: 44.0,
+                                                      ),
                                                       Text(
                                                         'Monthly \nEarning',
                                                         textAlign:
@@ -601,7 +468,7 @@ class _EmployeeProfileWidgetState extends State<EmployeeProfileWidget>
                                                   ),
                                                 ),
                                               ).animateOnPageLoad(animationsMap[
-                                                  'containerOnPageLoadAnimation3']!),
+                                                  'containerOnPageLoadAnimation2']!),
                                             ),
                                           ),
                                         ],
@@ -663,7 +530,7 @@ class _EmployeeProfileWidgetState extends State<EmployeeProfileWidget>
                                                     Colors.transparent,
                                                 onTap: () async {
                                                   context.pushNamed(
-                                                      'currentBookings');
+                                                      'Bookingcancel');
                                                 },
                                                 child: Column(
                                                   mainAxisSize:
@@ -676,7 +543,7 @@ class _EmployeeProfileWidgetState extends State<EmployeeProfileWidget>
                                                           MainAxisSize.max,
                                                       children: [
                                                         Text(
-                                                          'Current Bookings',
+                                                          'Cancel Bookings',
                                                           style: FlutterFlowTheme
                                                                   .of(context)
                                                               .bodyLarge
@@ -749,7 +616,7 @@ class _EmployeeProfileWidgetState extends State<EmployeeProfileWidget>
                                                     Colors.transparent,
                                                 onTap: () async {
                                                   context.pushNamed(
-                                                      'bookingHistory');
+                                                      'bookingshistory');
                                                 },
                                                 child: Column(
                                                   mainAxisSize:
@@ -924,7 +791,7 @@ class _EmployeeProfileWidgetState extends State<EmployeeProfileWidget>
                                                   child: Padding(
                                                     padding:
                                                         EdgeInsetsDirectional
-                                                            .fromSTEB(0.0, 24.0,
+                                                            .fromSTEB(0.0, 40.0,
                                                                 0.0, 0.0),
                                                     child: FFButtonWidget(
                                                       onPressed: () async {

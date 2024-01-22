@@ -1,6 +1,5 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
-import '/backend/push_notifications/push_notifications_util.dart';
 import '/flutter_flow/flutter_flow_choice_chips.dart';
 import '/flutter_flow/flutter_flow_count_controller.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
@@ -11,7 +10,6 @@ import '/flutter_flow/form_field_controller.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'villas_booking_details_widget.dart' show VillasBookingDetailsWidget;
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -43,6 +41,14 @@ class VillasBookingDetailsModel
   FocusNode? ageFocusNode;
   TextEditingController? ageController;
   String? Function(BuildContext, String?)? ageControllerValidator;
+  String? _ageControllerValidator(BuildContext context, String? val) {
+    if (val == null || val.isEmpty) {
+      return 'Field is required';
+    }
+
+    return null;
+  }
+
   // State field(s) for contact widget.
   FocusNode? contactFocusNode;
   TextEditingController? contactController;
@@ -66,33 +72,19 @@ class VillasBookingDetailsModel
   FocusNode? verificationFocusNode;
   TextEditingController? verificationController;
   String? Function(BuildContext, String?)? verificationControllerValidator;
-  String? _verificationControllerValidator(BuildContext context, String? val) {
-    if (val == null || val.isEmpty) {
-      return 'Field is required';
-    }
-
-    if (val.length < 5) {
-      return 'Requires at least 5 characters.';
-    }
-
-    return null;
-  }
-
   // State field(s) for CountControlleradult widget.
   int? countControlleradultValue;
   // State field(s) for CountControllerchildren widget.
   int? countControllerchildrenValue;
   // Stores action output result for [Backend Call - Create Document] action in Button widget.
   TotalBookingRecord? status;
-  // Stores action output result for [Firestore Query - Query a collection] action in Button widget.
-  List<UsersRecord>? allusers;
 
   /// Initialization and disposal methods.
 
   void initState(BuildContext context) {
     nameControllerValidator = _nameControllerValidator;
+    ageControllerValidator = _ageControllerValidator;
     contactControllerValidator = _contactControllerValidator;
-    verificationControllerValidator = _verificationControllerValidator;
   }
 
   void dispose() {
